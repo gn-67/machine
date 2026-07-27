@@ -1,0 +1,10 @@
+{
+  "_comment": "Map each mood to public Spotify playlists. `attribution` is the line shown on every card synced from that playlist. Playlist value can be a full open.spotify.com URL, spotify:playlist: URI, or bare playlist id.",
+  "playlists": [
+    {
+      "mood": "midnight",
+      "playlist": "PASTE_PUBLIC_PLAYLIST_URL_HERE",
+      "attribution": "from your late night drive playlist"
+    }
+  ]
+}
