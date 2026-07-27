@@ -1,0 +1,68 @@
+[
+  {
+    "kind": "song",
+    "id": "placeholder-sunrise-1",
+    "mood": "sunrise",
+    "title": "Placeholder Song (sunrise)",
+    "artist": "Swap me via sync script or a manual entry",
+    "albumArt": null,
+    "url": null,
+    "source": "manual",
+    "attribution": "placeholder — Gokul's picks land here"
+  },
+  {
+    "kind": "song",
+    "id": "placeholder-sunrise-2",
+    "mood": "sunrise",
+    "title": "Second Placeholder (sunrise)",
+    "artist": "Exists so anti-repeat logic has a pool to rotate",
+    "albumArt": null,
+    "url": null,
+    "source": "manual",
+    "attribution": "placeholder — Gokul's picks land here"
+  },
+  {
+    "kind": "song",
+    "id": "placeholder-high-noon-1",
+    "mood": "high-noon",
+    "title": "Placeholder Song (high noon)",
+    "artist": "Swap me",
+    "albumArt": null,
+    "url": null,
+    "source": "manual",
+    "attribution": "placeholder — Gokul's picks land here"
+  },
+  {
+    "kind": "song",
+    "id": "placeholder-golden-hour-1",
+    "mood": "golden-hour",
+    "title": "Placeholder Song (golden hour)",
+    "artist": "Swap me",
+    "albumArt": null,
+    "url": null,
+    "source": "manual",
+    "attribution": "placeholder — Gokul's picks land here"
+  },
+  {
+    "kind": "song",
+    "id": "placeholder-dusk-1",
+    "mood": "dusk",
+    "title": "Placeholder Song (dusk)",
+    "artist": "Swap me",
+    "albumArt": null,
+    "url": null,
+    "source": "manual",
+    "attribution": "placeholder — Gokul's picks land here"
+  },
+  {
+    "kind": "song",
+    "id": "placeholder-midnight-1",
+    "mood": "midnight",
+    "title": "Placeholder Song (midnight)",
+    "artist": "Swap me",
+    "albumArt": null,
+    "url": null,
+    "source": "manual",
+    "attribution": "placeholder — from the late night drive playlist"
+  }
+]

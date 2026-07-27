@@ -1,0 +1,52 @@
+[
+  {
+    "kind": "texture",
+    "id": "placeholder-sunrise-mist",
+    "mood": "sunrise",
+    "title": "Condensation on glass",
+    "description": "Backlit droplets on a cold window, first light coming through.",
+    "image": null,
+    "url": null,
+    "attribution": "placeholder — texture close-ups get hand-picked and swapped in"
+  },
+  {
+    "kind": "texture",
+    "id": "placeholder-high-noon-concrete",
+    "mood": "high-noon",
+    "title": "Sun-bleached concrete",
+    "description": "Hard shadows, zero gradient — the flattest light of the day.",
+    "image": null,
+    "url": null,
+    "attribution": "placeholder — texture close-ups get hand-picked and swapped in"
+  },
+  {
+    "kind": "texture",
+    "id": "placeholder-golden-hour-brass",
+    "mood": "golden-hour",
+    "title": "Brushed brass",
+    "description": "Warm metal catching low-angle light along its grain.",
+    "image": null,
+    "url": null,
+    "attribution": "placeholder — texture close-ups get hand-picked and swapped in"
+  },
+  {
+    "kind": "texture",
+    "id": "placeholder-dusk-velvet",
+    "mood": "dusk",
+    "title": "Crushed velvet",
+    "description": "Deep blue pile shifting between light and shadow as it folds.",
+    "image": null,
+    "url": null,
+    "attribution": "placeholder — texture close-ups get hand-picked and swapped in"
+  },
+  {
+    "kind": "texture",
+    "id": "placeholder-midnight-vinyl",
+    "mood": "midnight",
+    "title": "Vinyl grooves",
+    "description": "Macro shot of record grooves under a single lamp.",
+    "image": null,
+    "url": null,
+    "attribution": "placeholder — texture close-ups get hand-picked and swapped in"
+  }
+]

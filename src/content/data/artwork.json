@@ -1,0 +1,57 @@
+[
+  {
+    "kind": "artwork",
+    "id": "monet-impression-sunrise",
+    "mood": "sunrise",
+    "title": "Impression, Sunrise",
+    "artist": "Claude Monet",
+    "year": "1872",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Monet_-_Impression%2C_Sunrise.jpg/1280px-Monet_-_Impression%2C_Sunrise.jpg",
+    "url": "https://en.wikipedia.org/wiki/Impression,_Sunrise",
+    "attribution": "placeholder (public domain) — the painting that named Impressionism, for the hour it depicts"
+  },
+  {
+    "kind": "artwork",
+    "id": "hokusai-red-fuji",
+    "mood": "high-noon",
+    "title": "Fine Wind, Clear Morning (Red Fuji)",
+    "artist": "Katsushika Hokusai",
+    "year": "c. 1830",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Red_Fuji_southern_wind_clear_morning.jpg/1280px-Red_Fuji_southern_wind_clear_morning.jpg",
+    "url": "https://en.wikipedia.org/wiki/Fine_Wind,_Clear_Morning",
+    "attribution": "placeholder (public domain) — flat color and total clarity, like midday light"
+  },
+  {
+    "kind": "artwork",
+    "id": "turner-fighting-temeraire",
+    "mood": "golden-hour",
+    "title": "The Fighting Temeraire",
+    "artist": "J. M. W. Turner",
+    "year": "1839",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Turner%2C_J._M._W._-_The_Fighting_T%C3%A9m%C3%A9raire_tugged_to_her_last_berth_to_be_broken_up.jpg/1280px-Turner%2C_J._M._W._-_The_Fighting_T%C3%A9m%C3%A9raire_tugged_to_her_last_berth_to_be_broken_up.jpg",
+    "url": "https://en.wikipedia.org/wiki/The_Fighting_Temeraire",
+    "attribution": "placeholder (public domain) — Turner burning the whole sky gold"
+  },
+  {
+    "kind": "artwork",
+    "id": "millet-the-angelus",
+    "mood": "dusk",
+    "title": "The Angelus",
+    "artist": "Jean-François Millet",
+    "year": "1857–1859",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/JEAN-FRAN%C3%87OIS_MILLET_-_El_%C3%81ngelus_%28Museo_de_Orsay%2C_1857-1859._%C3%93leo_sobre_lienzo%2C_55.5_x_66_cm%29.jpg/1280px-JEAN-FRAN%C3%87OIS_MILLET_-_El_%C3%81ngelus_%28Museo_de_Orsay%2C_1857-1859._%C3%93leo_sobre_lienzo%2C_55.5_x_66_cm%29.jpg",
+    "url": "https://en.wikipedia.org/wiki/The_Angelus_(painting)",
+    "attribution": "placeholder (public domain) — the stillness right after the workday ends"
+  },
+  {
+    "kind": "artwork",
+    "id": "van-gogh-starry-night",
+    "mood": "midnight",
+    "title": "The Starry Night",
+    "artist": "Vincent van Gogh",
+    "year": "1889",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
+    "url": "https://en.wikipedia.org/wiki/The_Starry_Night",
+    "attribution": "placeholder (public domain) — the night sky, but the way it feels instead of the way it looks"
+  }
+]
