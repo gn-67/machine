@@ -1,32 +1,53 @@
-# React + TypeScript + Vite
+# machine
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An inspiration vending machine — a birthday gift. Dial in a time-of-day mood
+(sunrise · high noon · golden hour · dusk · midnight), press the button, and
+receive one song, one artwork, and one texture close-up — each with a note
+about why it was picked.
 
-Currently, two official plugins are available:
+Currently at **Phase 2** (functional prototype). See [ROADMAP.md](ROADMAP.md).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Run it
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```sh
+npm install
+npm run dev      # local dev server
+npm test         # content + pull-logic tests
+npm run build    # static production build in dist/
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+The deployed site is fully static — deployable to Netlify/Vercel/GitHub Pages
+as-is.
+
+## Adding content (CMS-lite)
+
+All content lives in `src/content/data/*.json`. Every entry needs a `mood`
+(one of `sunrise`, `high-noon`, `golden-hour`, `dusk`, `midnight`) and an
+`attribution` — the "why this was picked" line shown on the card. Entries are
+validated at load; a typo fails the tests rather than silently emptying a pool.
+
+- **Songs** (`songs.json`): synced from Spotify (below) and/or added by hand
+  with `"source": "manual"`.
+- **Artwork** (`artwork.json`): hand-picked. `image` is a URL or a path to a
+  file in `public/`.
+- **Textures** (`textures.json`): hand-picked material close-ups; `image: null`
+  renders a placeholder swatch until the real image is added.
+
+## Syncing songs from Spotify
+
+1. Create an app at <https://developer.spotify.com/dashboard>, copy
+   `.env.example` to `.env`, fill in the client ID/secret. `.env` is
+   gitignored — credentials never ship to the browser or the repo; the sync
+   runs locally via the Client Credentials flow (public playlist data only).
+2. Map public playlist URLs to moods (with an attribution line per playlist)
+   in `scripts/spotify.playlists.json`.
+3. `npm run sync-spotify` — snapshots track name, artists, album art, and link
+   into `songs.json`. Re-runnable; never touches manual entries.
+
+## Architecture notes
+
+- `src/content/` — headless data layer: types, JSON store + validation,
+  anti-repeat pull logic, local-time → mood mapping. No UI imports.
+- `src/App.tsx` — Phase 2 shell proving the flow end to end; replaced in Phase 3.
+- `src/scene/` — reserved for the Phase 3 visual layer (r3f meadow + machine);
+  see its README for the handoff contract.
