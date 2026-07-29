@@ -135,9 +135,6 @@ export function TimeDial({ minutes, mood, onChange }: TimeDialProps) {
     <div className="dial">
       <div className="dial-readout" aria-hidden="true">
         <span className="dial-time">{formatTime(minutes)}</span>
-        <span className="dial-mood-label" key={mood}>
-          {MOOD_LABELS[mood]}
-        </span>
       </div>
 
       <svg

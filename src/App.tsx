@@ -4,6 +4,7 @@ import { moodForMinutes, nowMinutes } from "./content/timeOfDay";
 import { pull } from "./content/pull";
 import { TimeDial } from "./scene/Dial";
 import { MoodWords } from "./scene/MoodWords";
+import { CardDetail } from "./scene/CardDetail";
 import "./App.css";
 
 /**
@@ -16,6 +17,7 @@ import "./App.css";
  */
 
 const CARD_KINDS = ["song", "artwork", "texture"] as const;
+type CardKind = (typeof CARD_KINDS)[number];
 
 const prefersReducedMotion = () =>
   typeof window !== "undefined" &&
@@ -25,6 +27,7 @@ export default function App() {
   const [minutes, setMinutes] = useState(() => nowMinutes());
   const [dialTouched, setDialTouched] = useState(false);
   const [result, setResult] = useState<Pull | null>(null);
+  const [selectedKind, setSelectedKind] = useState<CardKind | null>(null);
   const [rollId, setRollId] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const videoRefs = useRef<Partial<Record<Mood, HTMLVideoElement | null>>>({});
@@ -74,10 +77,20 @@ export default function App() {
     setMinutes(nowMinutes());
   }
 
+  useEffect(() => {
+    if (!selectedKind) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedKind(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selectedKind]);
+
   function handleRoll() {
     try {
       setResult(pull(mood));
       setRollId((n) => n + 1);
+      setSelectedKind(null);
       setError(null);
     } catch (e) {
       setResult(null);
@@ -109,16 +122,28 @@ export default function App() {
         <h1>machine</h1>
       </header>
 
-      <aside className="hud-left" aria-label="Your pull">
-        {CARD_KINDS.map((kind, i) => (
-          <article
-            key={result ? `${rollId}-${kind}` : kind}
-            className={result ? "card popped" : "card slot"}
-            style={result ? { animationDelay: `${i * 0.12}s` } : undefined}
-          >
-            <span className="card-kind">{kind}</span>
-          </article>
-        ))}
+      <aside className="hud-left">
+        <div className="card-stack" aria-label="Your pull">
+          {CARD_KINDS.map((kind, i) => (
+            <button
+              key={result ? `${rollId}-${kind}` : kind}
+              className={`card ${result ? "popped" : "slot"}${selectedKind === kind ? " selected" : ""}`}
+              style={result ? { animationDelay: `${i * 0.12}s` } : undefined}
+              disabled={!result}
+              aria-pressed={selectedKind === kind}
+              onClick={() => setSelectedKind((k) => (k === kind ? null : kind))}
+            >
+              <span className="card-kind">{kind}</span>
+            </button>
+          ))}
+        </div>
+        {result && selectedKind && (
+          <CardDetail
+            key={`${rollId}-${selectedKind}`}
+            item={result[selectedKind]}
+            onClose={() => setSelectedKind(null)}
+          />
+        )}
       </aside>
 
       <div className="hud-right">
