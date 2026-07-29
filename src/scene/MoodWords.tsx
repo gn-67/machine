@@ -6,7 +6,7 @@ import type { Mood } from "../content/types";
  */
 const MOOD_WORDS: Record<Mood, [string, string, string]> = {
   sunrise: ["soft", "hopeful", "waking"],
-  "high-noon": ["bright", "clear", "alive"],
+  "high-noon": ["bright", "clear", "bold"],
   "golden-hour": ["warm", "wistful", "glowing"],
   midnight: ["quiet", "deep", "dreaming"],
 };

@@ -5,8 +5,8 @@
     "mood": "sunrise",
     "title": "Condensation on glass",
     "description": "Backlit droplets on a cold window, first light coming through.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Water%20Droplets%20on%20a%20Traveler%27s%20Glass%20Window.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Water_Droplets_on_a_Traveler%27s_Glass_Window.jpg",
     "attribution": "the day still undecided, seen through a fogged window"
   },
   {
@@ -15,8 +15,8 @@
     "mood": "sunrise",
     "title": "Dew on grass",
     "description": "Every blade beaded overnight, each drop holding a tiny inverted sky.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Dew%20drops%20on%20blade%20of%20grass%20in%20the%20morning.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Dew_drops_on_blade_of_grass_in_the_morning.jpg",
     "attribution": "gone by nine — you have to be up for it"
   },
   {
@@ -25,8 +25,8 @@
     "mood": "sunrise",
     "title": "Torn croissant",
     "description": "Shattered lamination, butter in a hundred glass-thin layers.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Croissant%2C%20cross%20section.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Croissant%2C_cross_section.jpg",
     "attribution": "the texture of a morning with nowhere to be"
   },
   {
@@ -35,8 +35,8 @@
     "mood": "sunrise",
     "title": "Rumpled linen",
     "description": "Sheets holding the shape of sleep in early side-light.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Crumpled%20Sleep.JPG?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Crumpled_Sleep.JPG",
     "attribution": "soft topography — the first thing the sun touches"
   },
   {
@@ -45,8 +45,8 @@
     "mood": "high-noon",
     "title": "Sun-bleached concrete",
     "description": "Hard shadows, zero gradient — the flattest light of the day.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Tan%20rough%20slightly%20worn%20marked%20seamless%20concrete%20building%20wall%20texture.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Tan_rough_slightly_worn_marked_seamless_concrete_building_wall_texture.jpg",
     "attribution": "midday honesty: nothing hidden, nothing softened"
   },
   {
@@ -55,8 +55,8 @@
     "mood": "high-noon",
     "title": "Watermelon flesh",
     "description": "Cold pink grid with black seeds, cut side up on a hot day.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Sand%C3%ADas%20%28closeup%29%2007.JPG?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Sand%C3%ADas_%28closeup%29_07.JPG",
     "attribution": "July at its most literal"
   },
   {
@@ -65,8 +65,8 @@
     "mood": "high-noon",
     "title": "Pool water caustics",
     "description": "White light nets flexing over turquoise.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Water%20Ripples.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Water_Ripples.jpg",
     "attribution": "the pattern that only exists when the sun is straight overhead"
   },
   {
@@ -75,8 +75,8 @@
     "mood": "high-noon",
     "title": "Backlit lemon slice",
     "description": "Pith and pulp lit from behind like stained glass.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Lemon%20macro%20detail%20fruit.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Lemon_macro_detail_fruit.jpg",
     "attribution": "full brightness, full sour"
   },
   {
@@ -85,8 +85,8 @@
     "mood": "golden-hour",
     "title": "Brushed brass",
     "description": "Warm metal catching low-angle light along its grain.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Gold%20metallic%20finish%20clean%20smooth%20seamless%20metal%20surface%20sheet%20texture.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Gold_metallic_finish_clean_smooth_seamless_metal_surface_sheet_texture.jpg",
     "attribution": "a metal that only comes alive in low light"
   },
   {
@@ -95,8 +95,8 @@
     "mood": "golden-hour",
     "title": "Backlit wheat",
     "description": "A field of awns catching the last low sun, every stalk haloed.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Ears%20of%20wheat%20at%20dusk%20%28Unsplash%29.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Ears_of_wheat_at_dusk_%28Unsplash%29.jpg",
     "attribution": "Monet built whole paintings out of this exact glow"
   },
   {
@@ -105,29 +105,29 @@
     "mood": "golden-hour",
     "title": "Terracotta in raking light",
     "description": "Fired clay, every ridge and thumbprint thrown into relief.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Terraccotta%20Flower%20Pot.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Terraccotta_Flower_Pot.jpg",
     "attribution": "holds the day's heat long after the sun drops"
   },
   {
     "kind": "texture",
     "id": "golden-hour-honey",
     "mood": "golden-hour",
-    "title": "Honey in glass",
-    "description": "Slow amber pour, light trapped mid-fall.",
-    "image": null,
-    "url": null,
-    "attribution": "the exact color of the hour, pourable"
+    "title": "Dripping honeycomb",
+    "description": "Raw comb mid-drip, light trapped in the amber.",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Fresh%20honeycomb%20dripping%20honey%20India.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Fresh_honeycomb_dripping_honey_India.jpg",
+    "attribution": "the exact color of the hour, dripping"
   },
   {
     "kind": "texture",
     "id": "golden-hour-velvet",
     "mood": "golden-hour",
     "title": "Crushed velvet",
-    "description": "Deep blue pile shifting between light and shadow as it folds.",
-    "image": null,
-    "url": null,
-    "attribution": "dusk in fabric form — the blue hour you can touch"
+    "description": "Deep crimson pile shifting between light and shadow as it folds.",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Red%20velvet%20curtain.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Red_velvet_curtain.jpg",
+    "attribution": "dusk in fabric form — the day's last warmth, touchable"
   },
   {
     "kind": "texture",
@@ -135,8 +135,8 @@
     "mood": "midnight",
     "title": "Vinyl grooves",
     "description": "Macro shot of record grooves under a single lamp.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Vinyl%20groove%20macro.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Vinyl_groove_macro.jpg",
     "attribution": "music you can see — the physical middle of the night"
   },
   {
@@ -145,8 +145,8 @@
     "mood": "midnight",
     "title": "Streetlight on wet asphalt",
     "description": "Sodium-orange glow doubled in the road after rain.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Night%20Lights%20%28218082587%29.jpeg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Night_Lights_%28218082587%29.jpeg",
     "attribution": "the whole city repainted for whoever is still out"
   },
   {
@@ -155,8 +155,8 @@
     "mood": "midnight",
     "title": "Moonlight on black water",
     "description": "A path of broken silver across still water.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Luna-Reflection-Sea-Superluna-Night-Super-Water-1826849.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:Luna-Reflection-Sea-Superluna-Night-Super-Water-1826849.jpg",
     "attribution": "a road you can't take, pointed straight at you"
   },
   {
@@ -165,8 +165,8 @@
     "mood": "midnight",
     "title": "Dark chocolate snap",
     "description": "Matte surface, clean break, faint gloss on the fracture line.",
-    "image": null,
-    "url": null,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/2023%20Gorzka%20czekolada.jpg?width=1200",
+    "url": "https://commons.wikimedia.org/wiki/File:2023_Gorzka_czekolada.jpg",
     "attribution": "bitter, precise, best after everyone else is asleep"
   }
 ]
