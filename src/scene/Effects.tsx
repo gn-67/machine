@@ -63,7 +63,7 @@ const FX_BY_MOOD: Record<Mood, FxParams> = {
     flicker: 0.15,
   },
   "golden-hour": {
-    sun: [0.921 * SRC_ASPECT, 0.36],
+    sun: [0.9 * SRC_ASPECT, 0.352], // disc center measured off the poster frame
     sunRadius: 0.065,
     glowColor: [1.0, 0.42, 0.12],
     glow: 0.8,

@@ -63,6 +63,15 @@ describe("content store", () => {
     }
   });
 
+  it("uses stable Commons redirects, not hash-pathed thumb URLs", () => {
+    // upload.wikimedia.org/.../thumb/<hash>/<name>/ URLs 404 when the hash
+    // path is wrong or the file is renamed; Special:FilePath redirects.
+    for (const item of [...artwork, ...textures]) {
+      if (!item.image?.includes("wikimedia") && !item.image?.includes("wikipedia")) continue;
+      expect(item.image, item.id).toContain("Special:FilePath/");
+    }
+  });
+
   it("every item carries an attribution", () => {
     for (const item of [...songs, ...artwork, ...textures]) {
       expect(item.attribution.trim(), item.id).not.toBe("");
