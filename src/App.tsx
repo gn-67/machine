@@ -24,6 +24,44 @@ const prefersReducedMotion = () =>
   typeof window !== "undefined" &&
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/**
+ * Screen position of a point given in the backdrop video's source UV,
+ * replicating `object-fit: cover; object-position: 63% center` — the same
+ * math as the shader overlay's crop uniform. Lets HTML controls pin to
+ * physical spots on the rendered machine at any viewport size.
+ */
+function useCoverPoint(u: number, v: number) {
+  const [pos, setPos] = useState<{ left: string; top: string }>({
+    left: "50%",
+    top: "50%",
+  });
+  useEffect(() => {
+    const aspect = 16 / 9;
+    const calc = () => {
+      const vp = window.innerWidth / window.innerHeight;
+      let ox = 0;
+      let oy = 0;
+      let fx = 1;
+      let fy = 1;
+      if (vp < aspect) {
+        fx = vp / aspect;
+        ox = (1 - fx) * 0.63;
+      } else {
+        fy = aspect / vp;
+        oy = (1 - fy) * 0.5;
+      }
+      setPos({
+        left: `${(((u - ox) / fx) * 100).toFixed(2)}%`,
+        top: `${(((v - oy) / fy) * 100).toFixed(2)}%`,
+      });
+    };
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, [u, v]);
+  return pos;
+}
+
 export default function App() {
   const [minutes, setMinutes] = useState(() => nowMinutes());
   const [dialTouched, setDialTouched] = useState(false);
@@ -35,6 +73,8 @@ export default function App() {
 
   const mood = moodForMinutes(minutes);
   const prevMoodRef = useRef<Mood>(mood);
+  // the machine's physical square button, measured off the renders
+  const rollBtnPos = useCoverPoint(0.632, 0.687);
 
   // Follow the real clock until the dial is touched.
   useEffect(() => {
@@ -173,11 +213,15 @@ export default function App() {
         </button>
       </div>
 
+      <div className="machine-roll" style={rollBtnPos}>
+        {rollId > 0 && <span key={rollId} className="roll-pulse" aria-hidden="true" />}
+        <button className="machine-roll-btn" onClick={handleRoll}>
+          {result ? "again" : "roll"}
+        </button>
+      </div>
+
       <div className="hud hud-bottom">
         {error && <p className="error">{error}</p>}
-        <button className="roll-btn" onClick={handleRoll}>
-          {result ? "roll again" : "roll"}
-        </button>
         <MoodWords mood={mood} />
       </div>
     </main>
