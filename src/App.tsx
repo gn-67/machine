@@ -24,17 +24,17 @@ const prefersReducedMotion = () =>
   typeof window !== "undefined" &&
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/** The machine's silhouette in the render, as source UV bounds. */
+const MACHINE_UV = { u0: 0.456, v0: 0.188, u1: 0.674, v1: 0.85 };
+
 /**
- * Screen position of a point given in the backdrop video's source UV,
+ * Screen rect for a region given in the backdrop video's source UV,
  * replicating `object-fit: cover; object-position: 63% center` — the same
- * math as the shader overlay's crop uniform. Lets HTML controls pin to
- * physical spots on the rendered machine at any viewport size.
+ * math as the shader overlay's crop uniform. Lets HTML controls sit on
+ * physical parts of the rendered machine at any viewport size.
  */
-function useCoverPoint(u: number, v: number) {
-  const [pos, setPos] = useState<{ left: string; top: string }>({
-    left: "50%",
-    top: "50%",
-  });
+function useCoverRect(u0: number, v0: number, u1: number, v1: number) {
+  const [rect, setRect] = useState<Record<string, string>>({});
   useEffect(() => {
     const aspect = 16 / 9;
     const calc = () => {
@@ -50,16 +50,19 @@ function useCoverPoint(u: number, v: number) {
         fy = aspect / vp;
         oy = (1 - fy) * 0.5;
       }
-      setPos({
-        left: `${(((u - ox) / fx) * 100).toFixed(2)}%`,
-        top: `${(((v - oy) / fy) * 100).toFixed(2)}%`,
+      const pct = (n: number) => `${(n * 100).toFixed(2)}%`;
+      setRect({
+        left: pct((u0 - ox) / fx),
+        top: pct((v0 - oy) / fy),
+        width: pct((u1 - u0) / fx),
+        height: pct((v1 - v0) / fy),
       });
     };
     calc();
     window.addEventListener("resize", calc);
     return () => window.removeEventListener("resize", calc);
-  }, [u, v]);
-  return pos;
+  }, [u0, v0, u1, v1]);
+  return rect;
 }
 
 export default function App() {
@@ -73,8 +76,13 @@ export default function App() {
 
   const mood = moodForMinutes(minutes);
   const prevMoodRef = useRef<Mood>(mood);
-  // the machine's physical square button, measured off the renders
-  const rollBtnPos = useCoverPoint(0.632, 0.687);
+  // the machine itself is the roll target
+  const machineRect = useCoverRect(
+    MACHINE_UV.u0,
+    MACHINE_UV.v0,
+    MACHINE_UV.u1,
+    MACHINE_UV.v1,
+  );
 
   // Follow the real clock until the dial is touched.
   useEffect(() => {
@@ -213,12 +221,14 @@ export default function App() {
         </button>
       </div>
 
-      <div className="machine-roll" style={rollBtnPos}>
+      <button
+        className="machine-hotspot"
+        style={machineRect}
+        onClick={handleRoll}
+        aria-label={result ? "Roll again" : "Roll"}
+      >
         {rollId > 0 && <span key={rollId} className="roll-pulse" aria-hidden="true" />}
-        <button className="machine-roll-btn" onClick={handleRoll}>
-          {result ? "again" : "roll"}
-        </button>
-      </div>
+      </button>
 
       <div className="hud hud-bottom">
         {error && <p className="error">{error}</p>}
