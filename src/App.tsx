@@ -6,6 +6,7 @@ import { TimeDial } from "./scene/Dial";
 import { MoodWords } from "./scene/MoodWords";
 import { CardDetail } from "./scene/CardDetail";
 import { EffectsOverlay } from "./scene/Effects";
+import { Note } from "./scene/Note";
 import "./App.css";
 
 /**
@@ -172,6 +173,8 @@ export default function App() {
       <header className="hud hud-top">
         <h1>machine</h1>
       </header>
+
+      <Note />
 
       <aside className="hud-left">
         <div className="card-stack" aria-label="Your pull">

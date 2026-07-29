@@ -1,0 +1,4 @@
+Local artwork images. Drop a file here and reference it from
+src/content/data/artwork.json as "/artwork/<filename>".
+
+Example: public/artwork/irwin-1-2-3-4.jpg  ->  "image": "/artwork/irwin-1-2-3-4.jpg"
