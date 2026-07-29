@@ -5,6 +5,7 @@ import { pull } from "./content/pull";
 import { TimeDial } from "./scene/Dial";
 import { MoodWords } from "./scene/MoodWords";
 import { CardDetail } from "./scene/CardDetail";
+import { EffectsOverlay } from "./scene/Effects";
 import "./App.css";
 
 /**
@@ -117,6 +118,8 @@ export default function App() {
           />
         ))}
       </div>
+
+      <EffectsOverlay mood={mood} />
 
       <header className="hud hud-top">
         <h1>machine</h1>
