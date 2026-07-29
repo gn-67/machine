@@ -60,10 +60,6 @@ for (const entry of entries) {
     console.error(`Playlist "${entry.playlist}" has invalid mood "${entry.mood}" (use: ${MOODS.join(", ")})`);
     process.exit(1);
   }
-  if (!entry.attribution?.trim()) {
-    console.error(`Playlist "${entry.playlist}" needs an attribution line`);
-    process.exit(1);
-  }
 }
 
 function playlistId(ref) {
@@ -83,6 +79,14 @@ async function getToken() {
   });
   if (!res.ok) throw new Error(`Token request failed (${res.status}): ${await res.text()}`);
   return (await res.json()).access_token;
+}
+
+async function fetchPlaylistName(token, id) {
+  const res = await fetch(`https://api.spotify.com/v1/playlists/${id}?fields=name`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error(`Playlist ${id} metadata fetch failed (${res.status}): ${await res.text()}`);
+  return (await res.json()).name;
 }
 
 async function fetchPlaylistTracks(token, id) {
@@ -119,8 +123,9 @@ const synced = [];
 const seenIds = new Set();
 for (const entry of entries) {
   const id = playlistId(entry.playlist);
+  const name = await fetchPlaylistName(token, id);
   const tracks = await fetchPlaylistTracks(token, id);
-  console.log(`✓ ${tracks.length} tracks from ${entry.mood} playlist (${id})`);
+  console.log(`✓ ${tracks.length} tracks from "${name}" → ${entry.mood} (${id})`);
   for (const track of tracks) {
     if (seenIds.has(track.id)) continue; // same track in two playlists: first mood wins
     seenIds.add(track.id);
@@ -133,7 +138,9 @@ for (const entry of entries) {
       albumArt: track.albumArt,
       url: track.url,
       source: "spotify-sync",
-      attribution: entry.attribution,
+      playlistId: id,
+      playlistName: name,
+      attribution: entry.attribution?.trim() || `from your "${name}" playlist`,
     });
   }
 }

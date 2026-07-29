@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
+import playlistsConfig from "../../scripts/spotify.playlists.json";
 import { moodForHour } from "./timeOfDay";
 import { pull } from "./pull";
 import type { SeenStore } from "./pull";
+import { songPlayUrl } from "./spotify";
 import { poolFor, songs, artwork, textures } from "./store";
-import { MOODS } from "./types";
+import { MOODS, type Mood, type Song } from "./types";
 
 function memoryStore(): SeenStore {
   const map = new Map<string, string[]>();
@@ -49,6 +51,59 @@ describe("content store", () => {
     for (const item of [...songs, ...artwork, ...textures]) {
       expect(item.attribution.trim(), item.id).not.toBe("");
     }
+  });
+});
+
+describe("spotify playlist config", () => {
+  const config = playlistsConfig as { playlists: { mood: string; playlist: string }[] };
+
+  it("maps every playlist to a real mood", () => {
+    for (const entry of config.playlists) {
+      expect(MOODS, entry.playlist).toContain(entry.mood as Mood);
+    }
+  });
+
+  it("has a resolvable id for every playlist, with no duplicates", () => {
+    const ids = config.playlists.map((entry) => {
+      const match = entry.playlist.match(/playlist[/:]([A-Za-z0-9]+)/);
+      expect(match, `no playlist id in "${entry.playlist}"`).not.toBeNull();
+      return match![1];
+    });
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+});
+
+describe("songPlayUrl", () => {
+  const base: Song = {
+    kind: "song",
+    id: "track123",
+    mood: "midnight",
+    title: "t",
+    artist: "a",
+    albumArt: null,
+    url: "https://open.spotify.com/track/track123",
+    source: "manual",
+    attribution: "why",
+  };
+
+  it("links straight to the track when there is no playlist context", () => {
+    expect(songPlayUrl(base)).toBe("https://open.spotify.com/track/track123");
+  });
+
+  it("adds the playlist context for synced tracks", () => {
+    const synced: Song = {
+      ...base,
+      source: "spotify-sync",
+      playlistId: "pl456",
+      playlistName: "late night drive",
+    };
+    expect(songPlayUrl(synced)).toBe(
+      "https://open.spotify.com/track/track123?context=spotify%3Aplaylist%3Apl456",
+    );
+  });
+
+  it("returns null when the song has no url", () => {
+    expect(songPlayUrl({ ...base, url: null })).toBeNull();
   });
 });
 
