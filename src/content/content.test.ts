@@ -5,6 +5,7 @@ import { pull } from "./pull";
 import type { SeenStore } from "./pull";
 import { songPlayUrl, songSpotifyUri } from "./spotify";
 import { poolFor, songs, artwork, textures } from "./store";
+import { picksFor, randomPick } from "./picks";
 import { MOODS, type Mood, type Song } from "./types";
 
 function memoryStore(): SeenStore {
@@ -75,6 +76,28 @@ describe("content store", () => {
   it("every item carries an attribution", () => {
     for (const item of [...songs, ...artwork, ...textures]) {
       expect(item.attribution.trim(), item.id).not.toBe("");
+    }
+  });
+});
+
+describe("picks", () => {
+  it("has at least one curated pick per mood", () => {
+    for (const mood of MOODS) {
+      expect(picksFor(mood).length, `picks for ${mood}`).toBeGreaterThan(0);
+    }
+  });
+
+  it("picks are never part of a playlist context", () => {
+    for (const mood of MOODS) {
+      for (const p of picksFor(mood)) expect(p.playlistId, p.id).toBeUndefined();
+    }
+  });
+
+  it("randomPick avoids repeating the excluded id when alternatives exist", () => {
+    const pool = picksFor("midnight");
+    expect(pool.length).toBeGreaterThan(1);
+    for (let i = 0; i < 20; i++) {
+      expect(randomPick("midnight", pool[0].id)?.id).not.toBe(pool[0].id);
     }
   });
 });

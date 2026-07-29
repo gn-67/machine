@@ -28,7 +28,7 @@ function requireString(file: string, item: Record<string, unknown>, field: strin
     fail(file, item, `${field} is required`);
 }
 
-function loadSongs(raw: unknown[]): Song[] {
+export function loadSongs(raw: unknown[]): Song[] {
   const seen = new Set<string>();
   return raw.map((entry) => {
     const item = entry as Record<string, unknown>;

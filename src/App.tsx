@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { MOODS, type Mood, type Pull } from "./content/types";
+import { KIND_LABELS, MOODS, type Mood, type Pull } from "./content/types";
 import { moodForMinutes, nowMinutes } from "./content/timeOfDay";
 import { pull } from "./content/pull";
+import { picksFor, randomPick } from "./content/picks";
 import { TimeDial } from "./scene/Dial";
 import { MoodWords } from "./scene/MoodWords";
 import { CardDetail } from "./scene/CardDetail";
@@ -78,6 +79,7 @@ export default function App() {
 
   const mood = moodForMinutes(minutes);
   const prevMoodRef = useRef<Mood>(mood);
+  const hasPicks = picksFor(mood).length > 0;
   // the machine itself is the roll target
   const machineRect = useCoverRect(
     MACHINE_UV.u0,
@@ -144,6 +146,14 @@ export default function App() {
     };
   }, [selectedKind]);
 
+  function handleSwapToPick() {
+    setResult((prev) => {
+      if (!prev) return prev;
+      const next = randomPick(mood, prev.song.id);
+      return next ? { ...prev, song: next } : prev;
+    });
+  }
+
   function handleRoll() {
     try {
       setResult(pull(mood));
@@ -207,13 +217,17 @@ export default function App() {
                   ) : (
                     <div className="card-preview placeholder" aria-hidden="true" />
                   ))}
-                <span className="card-kind">{kind}</span>
+                <span className="card-kind">{KIND_LABELS[kind]}</span>
               </button>
             );
           })}
         </div>
         {result && selectedKind && (
-          <CardDetail key={`${rollId}-${selectedKind}`} item={result[selectedKind]} />
+          <CardDetail
+            key={`${rollId}-${selectedKind}`}
+            item={result[selectedKind]}
+            onSwapSong={selectedKind === "song" && hasPicks ? handleSwapToPick : undefined}
+          />
         )}
       </aside>
 

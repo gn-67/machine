@@ -22,6 +22,12 @@ export const MOOD_LABELS: Record<Mood, string> = {
   midnight: "Midnight",
 };
 
+export const KIND_LABELS = {
+  song: "a song",
+  artwork: "an artwork",
+  texture: "a texture",
+} as const;
+
 interface ContentBase {
   /** Stable unique id. Spotify tracks use their Spotify track id. */
   id: string;
