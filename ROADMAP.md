@@ -39,7 +39,10 @@ dusk — four moods, matching the four Blender sky renders in `public/renders/`)
   (baked wind sim shared across moods, frame-synced, seamless loops);
   crossfade + timeline handoff on mood change; webp posters for instant paint.
 - [ ] **3.1 Integration points**: `src/scene/` folder ready to receive the Blender glTF meadow + machine (r3f `<Canvas>` shell, glTF loader, named animation/interaction hooks). *No placeholder 3D before the handoff.*
-- [ ] **3.2 Analog dial** mood selector + small digital screen readout.
+- [x] **3.2 Analog dial** mood selector + small digital screen readout —
+  SVG overlay (per `src/scene/README.md`): 24h dial, noon at top, 15-min
+  detents, drag/scroll/keys, military-time readout, tracks the live clock
+  until touched ("back to now" re-attaches). Mood words HUD at the bottom.
 - [ ] **3.3 Procedural sky/lighting** per mood (sky gradient, sun/moon position, stars at midnight) — independent of the meadow model.
 - [ ] **3.4 Button-press → cards tumble out** animation (satisfying, not gaudy; spring physics).
 - [ ] **3.5 Card flip/expand** to reveal attribution.

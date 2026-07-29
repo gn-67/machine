@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import playlistsConfig from "../../scripts/spotify.playlists.json";
-import { moodForHour } from "./timeOfDay";
+import { moodForHour, moodForMinutes, DAY_MINUTES } from "./timeOfDay";
 import { pull } from "./pull";
 import type { SeenStore } from "./pull";
 import { songPlayUrl } from "./spotify";
@@ -34,6 +34,22 @@ describe("moodForHour", () => {
     expect(() => moodForHour(24)).toThrow();
     expect(() => moodForHour(-1)).toThrow();
     expect(() => moodForHour(3.5)).toThrow();
+  });
+});
+
+describe("moodForMinutes", () => {
+  it("agrees with moodForHour at boundaries", () => {
+    expect(moodForMinutes(5 * 60)).toBe("sunrise");
+    expect(moodForMinutes(5 * 60 - 15)).toBe("midnight");
+    expect(moodForMinutes(16 * 60)).toBe("golden-hour");
+    expect(moodForMinutes(21 * 60 + 45)).toBe("golden-hour");
+    expect(moodForMinutes(22 * 60)).toBe("midnight");
+  });
+
+  it("wraps past midnight in both directions", () => {
+    expect(moodForMinutes(DAY_MINUTES + 30)).toBe("midnight");
+    expect(moodForMinutes(-30)).toBe("midnight");
+    expect(moodForMinutes(DAY_MINUTES + 6 * 60)).toBe("sunrise");
   });
 });
 

@@ -1,5 +1,6 @@
-/* Initial visual prototype — the four Blender renders are the scene,
-   crossfaded on mood change. UI floats over them as a light HUD.
+/* The four Blender renders are the scene, crossfaded when the dial's time
+   crosses a mood boundary. UI floats over them: card slots left of the
+   machine, time dial right, roll button + mood words along the bottom.
    Card faces are intentionally blank for now. */
 
 .scene {
@@ -52,7 +53,7 @@
 }
 
 .hud-bottom {
-  padding-bottom: 2.25rem;
+  padding-bottom: 1.5rem;
 }
 
 h1 {
@@ -63,39 +64,198 @@ h1 {
   text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
 }
 
-.mood-picker {
+/* --- left column: the three roll slots --- */
+
+.hud-left {
+  position: absolute;
+  left: clamp(1rem, 5vw, 4rem);
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  justify-content: center;
-  padding: 0.35rem;
-  border-radius: 999px;
-  background: rgba(15, 15, 25, 0.35);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  flex-direction: column;
+  gap: clamp(0.6rem, 1.6vh, 1rem);
+  z-index: 2;
 }
 
-.mood-btn {
+.card {
+  height: clamp(96px, 24vh, 210px);
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0.7rem;
+}
+
+.card.slot {
+  border: 1.5px dashed rgba(255, 255, 255, 0.4);
+  background: rgba(15, 15, 25, 0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.card.slot .card-kind {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.card.popped {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 32px rgba(10, 8, 24, 0.35);
+  animation: card-pop 0.6s cubic-bezier(0.22, 1.2, 0.36, 1) both;
+}
+
+.card-kind {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(40, 36, 54, 0.55);
+  text-align: center;
+}
+
+@keyframes card-pop {
+  from {
+    opacity: 0;
+    transform: translateX(56px) rotate(2.5deg) scale(0.92);
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotate(0) scale(1);
+  }
+}
+
+/* --- right column: time dial --- */
+
+.hud-right {
+  position: absolute;
+  right: clamp(0.75rem, 4vw, 3.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  z-index: 2;
+}
+
+.dial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.dial-readout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+}
+
+.dial-time {
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.5);
+}
+
+.dial-mood-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  opacity: 0.85;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  animation: word-in 0.7s ease both;
+}
+
+.dial-svg {
+  width: clamp(150px, 18vw, 230px);
+  height: auto;
+  touch-action: none;
+  cursor: grab;
+  outline: none;
+  overflow: visible;
+}
+
+.dial-svg.dragging {
+  cursor: grabbing;
+}
+
+.dial-svg:focus-visible .dial-knob {
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 2;
+}
+
+.dial-arc {
+  transition: opacity 0.5s ease, stroke-width 0.5s ease;
+}
+
+.dial-tick {
+  stroke: rgba(255, 255, 255, 0.45);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+}
+
+.dial-tick.major {
+  stroke: rgba(255, 255, 255, 0.8);
+  stroke-width: 2;
+}
+
+.dial-knob {
+  fill: rgba(15, 15, 25, 0.5);
+  stroke: rgba(255, 255, 255, 0.28);
+  stroke-width: 1.2;
+}
+
+.dial-pointer {
+  transition: transform 0.45s cubic-bezier(0.3, 1.35, 0.45, 1);
+}
+
+.dial-svg.dragging .dial-pointer {
+  transition: none;
+}
+
+.dial-notch {
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.dial-marker {
+  fill: #fff;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+}
+
+.now-btn {
   font: inherit;
-  font-size: 0.88rem;
-  padding: 0.4rem 0.9rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  padding: 0.35rem 0.9rem;
   border-radius: 999px;
   border: none;
-  background: transparent;
-  color: inherit;
+  background: rgba(15, 15, 25, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
   cursor: pointer;
-  opacity: 0.65;
-  transition: opacity 0.2s ease, background 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
 }
 
-.mood-btn:hover {
+.now-btn.visible {
   opacity: 0.9;
+  pointer-events: auto;
 }
 
-.mood-btn.active {
+.now-btn:hover {
   opacity: 1;
-  background: rgba(255, 255, 255, 0.22);
 }
+
+/* --- bottom: roll button + mood words --- */
 
 .roll-btn {
   font: inherit;
@@ -123,6 +283,41 @@ h1 {
   transform: scale(0.97);
 }
 
+.mood-words {
+  margin: 0;
+  display: flex;
+  gap: 0.55rem;
+  align-items: baseline;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: lowercase;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+
+.mood-words span {
+  animation: word-in 0.8s ease both;
+}
+
+.mood-words span + span::before {
+  content: "·";
+  margin-right: 0.55rem;
+  opacity: 0.55;
+}
+
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(9px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 .error {
   margin: 0;
   padding: 0.6rem 1rem;
@@ -134,52 +329,64 @@ h1 {
   font-size: 0.9rem;
 }
 
-/* --- blank cards tumbling out of the machine --- */
+/* --- narrow screens: cards shrink into a row above the bottom HUD, dial docks top-right --- */
 
-.cards {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.card.blank {
-  width: min(200px, 27vw);
-  aspect-ratio: 3 / 4;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 12px 32px rgba(10, 8, 24, 0.35);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 0.7rem;
-  animation: card-in 0.55s cubic-bezier(0.22, 1.2, 0.36, 1) both;
-}
-
-.card-kind {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: rgba(40, 36, 54, 0.55);
-}
-
-@keyframes card-in {
-  from {
-    opacity: 0;
-    transform: translateY(46px) rotate(-1.5deg) scale(0.94);
+@media (max-width: 760px) {
+  .hud-left {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    order: 2;
+    padding: 0 1rem;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0) rotate(0) scale(1);
+
+  .card {
+    height: clamp(84px, 16vh, 140px);
+  }
+
+  .hud-right {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    transform: none;
+  }
+
+  .dial-svg {
+    width: 110px;
+  }
+
+  .dial-time {
+    font-size: 1.25rem;
+  }
+
+  .scene {
+    justify-content: flex-end;
+  }
+
+  .hud-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: flex-start;
+  }
+
+  .hud-bottom {
+    order: 3;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bg {
+  .bg,
+  .dial-pointer,
+  .dial-arc,
+  .now-btn {
     transition: none;
   }
 
-  .card.blank {
+  .card.popped,
+  .mood-words span,
+  .dial-mood-label {
     animation: none;
   }
 

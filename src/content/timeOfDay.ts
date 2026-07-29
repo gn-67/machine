@@ -23,3 +23,16 @@ export function moodForHour(hour: number): Mood {
 export function currentMood(now: Date = new Date()): Mood {
   return moodForHour(now.getHours());
 }
+
+export const DAY_MINUTES = 24 * 60;
+
+/** Minutes since local midnight — the unit the time dial operates in. */
+export function nowMinutes(now: Date = new Date()): number {
+  return now.getHours() * 60 + now.getMinutes();
+}
+
+/** Mood for a minutes-since-midnight value; wraps, so dial math can overshoot. */
+export function moodForMinutes(minutes: number): Mood {
+  const wrapped = ((minutes % DAY_MINUTES) + DAY_MINUTES) % DAY_MINUTES;
+  return moodForHour(Math.floor(wrapped / 60));
+}
