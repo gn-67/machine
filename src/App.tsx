@@ -5,18 +5,32 @@ import { pull } from "./content/pull";
 import "./App.css";
 
 /**
- * Phase 2 prototype: plain controls that validate the whole flow
- * (mood → pool → pull → cards with attribution) before the Phase 3
- * dial + 3D scene replace this shell.
+ * Initial visual prototype: the Blender meadow renders are the scene itself.
+ * All four moods stay mounted and crossfade via opacity, so changing the time
+ * of day never flashes or reloads. Rolling calls the real pull() (anti-repeat
+ * cycling included) but the cards come up blank — their faces are the next
+ * step.
  */
+
+const RENDERS: Record<Mood, string> = {
+  sunrise: "/renders/sunrise.webp",
+  "high-noon": "/renders/high-noon.webp",
+  "golden-hour": "/renders/golden-hour.webp",
+  midnight: "/renders/midnight.webp",
+};
+
+const CARD_KINDS = ["song", "artwork", "texture"] as const;
+
 export default function App() {
   const [mood, setMood] = useState<Mood>(() => currentMood());
   const [result, setResult] = useState<Pull | null>(null);
+  const [rollId, setRollId] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
-  function handlePull() {
+  function handleRoll() {
     try {
       setResult(pull(mood));
+      setRollId((n) => n + 1);
       setError(null);
     } catch (e) {
       setResult(null);
@@ -25,86 +39,55 @@ export default function App() {
   }
 
   return (
-    <main className={`app mood-${mood}`}>
-      <header>
+    <main className={`scene mood-${mood}`}>
+      <div className="backdrop" aria-hidden="true">
+        {MOODS.map((m) => (
+          <img
+            key={m}
+            src={RENDERS[m]}
+            alt=""
+            className={m === mood ? "bg visible" : "bg"}
+            draggable={false}
+          />
+        ))}
+      </div>
+
+      <header className="hud hud-top">
         <h1>machine</h1>
-        <p className="tagline">a small inspiration, on demand</p>
+        <nav className="mood-picker" aria-label="Time of day">
+          {MOODS.map((m) => (
+            <button
+              key={m}
+              className={m === mood ? "mood-btn active" : "mood-btn"}
+              onClick={() => setMood(m)}
+            >
+              {MOOD_LABELS[m]}
+            </button>
+          ))}
+        </nav>
       </header>
 
-      <section className="mood-picker" aria-label="Pick a mood">
-        {MOODS.map((m) => (
-          <button
-            key={m}
-            className={m === mood ? "mood-btn active" : "mood-btn"}
-            onClick={() => setMood(m)}
-          >
-            {MOOD_LABELS[m]}
-          </button>
-        ))}
-      </section>
-      <p className="mood-note">
-        dialed to <strong>{MOOD_LABELS[mood]}</strong>
-        {mood === currentMood() && " — matching your clock right now"}
-      </p>
+      <div className="hud hud-bottom">
+        {error && <p className="error">{error}</p>}
 
-      <button className="pull-btn" onClick={handlePull}>
-        {result ? "pull again" : "pull"}
-      </button>
+        {result && (
+          <section className="cards" key={rollId} aria-label="Your pull">
+            {CARD_KINDS.map((kind, i) => (
+              <article
+                className="card blank"
+                key={kind}
+                style={{ animationDelay: `${i * 0.09}s` }}
+              >
+                <span className="card-kind">{kind}</span>
+              </article>
+            ))}
+          </section>
+        )}
 
-      {error && <p className="error">{error}</p>}
-
-      {result && (
-        <section className="cards" aria-label="Your pull">
-          <article className="card">
-            <span className="card-kind">song</span>
-            {result.song.albumArt ? (
-              <img src={result.song.albumArt} alt="" className="card-img" />
-            ) : (
-              <div className="card-img placeholder" aria-hidden="true" />
-            )}
-            <h2>{result.song.title}</h2>
-            <p className="card-sub">{result.song.artist}</p>
-            {result.song.url && (
-              <a href={result.song.url} target="_blank" rel="noreferrer">
-                listen ↗
-              </a>
-            )}
-            <p className="attribution">{result.song.attribution}</p>
-          </article>
-
-          <article className="card">
-            <span className="card-kind">artwork</span>
-            {result.artwork.image ? (
-              <img src={result.artwork.image} alt={result.artwork.title} className="card-img" />
-            ) : (
-              <div className="card-img placeholder" aria-hidden="true" />
-            )}
-            <h2>{result.artwork.title}</h2>
-            <p className="card-sub">
-              {result.artwork.artist}
-              {result.artwork.year && `, ${result.artwork.year}`}
-            </p>
-            {result.artwork.url && (
-              <a href={result.artwork.url} target="_blank" rel="noreferrer">
-                see it ↗
-              </a>
-            )}
-            <p className="attribution">{result.artwork.attribution}</p>
-          </article>
-
-          <article className="card">
-            <span className="card-kind">texture</span>
-            {result.texture.image ? (
-              <img src={result.texture.image} alt={result.texture.title} className="card-img" />
-            ) : (
-              <div className="card-img placeholder" aria-hidden="true" />
-            )}
-            <h2>{result.texture.title}</h2>
-            <p className="card-sub">{result.texture.description}</p>
-            <p className="attribution">{result.texture.attribution}</p>
-          </article>
-        </section>
-      )}
+        <button className="roll-btn" onClick={handleRoll}>
+          {result ? "roll again" : "roll"}
+        </button>
+      </div>
     </main>
   );
 }

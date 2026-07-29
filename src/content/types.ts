@@ -10,7 +10,6 @@ export const MOODS = [
   "sunrise",
   "high-noon",
   "golden-hour",
-  "dusk",
   "midnight",
 ] as const;
 
@@ -20,7 +19,6 @@ export const MOOD_LABELS: Record<Mood, string> = {
   sunrise: "Sunrise",
   "high-noon": "High Noon",
   "golden-hour": "Golden Hour",
-  dusk: "Dusk",
   midnight: "Midnight",
 };
 

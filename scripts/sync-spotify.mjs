@@ -23,7 +23,7 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SONGS_PATH = join(root, "src/content/data/songs.json");
 const CONFIG_PATH = join(root, "scripts/spotify.playlists.json");
-const MOODS = ["sunrise", "high-noon", "golden-hour", "dusk", "midnight"];
+const MOODS = ["sunrise", "high-noon", "golden-hour", "midnight"];
 
 // --- tiny .env loader (no dependency needed) -------------------------------
 const envPath = join(root, ".env");

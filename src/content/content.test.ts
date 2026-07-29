@@ -14,15 +14,15 @@ function memoryStore(): SeenStore {
 }
 
 describe("moodForHour", () => {
-  it("maps the day onto the five moods", () => {
+  it("maps the day onto the four moods", () => {
     expect(moodForHour(5)).toBe("sunrise");
     expect(moodForHour(8)).toBe("sunrise");
     expect(moodForHour(9)).toBe("high-noon");
     expect(moodForHour(15)).toBe("high-noon");
     expect(moodForHour(16)).toBe("golden-hour");
     expect(moodForHour(18)).toBe("golden-hour");
-    expect(moodForHour(19)).toBe("dusk");
-    expect(moodForHour(21)).toBe("dusk");
+    expect(moodForHour(19)).toBe("golden-hour");
+    expect(moodForHour(21)).toBe("golden-hour");
     expect(moodForHour(22)).toBe("midnight");
     expect(moodForHour(0)).toBe("midnight");
     expect(moodForHour(4)).toBe("midnight");

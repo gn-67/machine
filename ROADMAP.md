@@ -4,7 +4,8 @@ An inspiration vending machine. Pick a time-of-day mood, press the button, recei
 
 **Stack:** Vite + React + TypeScript. Spotify data is pulled by a local **sync script** (Client Credentials flow) that snapshots playlist tracks into committed JSON — so the deployed site is fully static, the client secret never ships to the browser, and hosting is free (Netlify/Vercel/GitHub Pages). Phase 3 visuals use `react-three-fiber` + `@react-three/drei`, receiving a Blender-authored glTF scene.
 
-Moods: `sunrise · high-noon · golden-hour · dusk · midnight`
+Moods: `sunrise · high-noon · golden-hour · midnight` (golden hour absorbs
+dusk — four moods, matching the four Blender sky renders in `public/renders/`)
 
 ---
 
@@ -30,6 +31,10 @@ Moods: `sunrise · high-noon · golden-hour · dusk · midnight`
 
 ## Phase 3 — Visual & interactive layer (after prototype validated)
 
+- [x] **3.0 Rendered-scene prototype**: the four Blender mood renders
+  (`public/renders/`) are the full-screen scene; moods crossfade seamlessly;
+  roll produces three blank cards (faces come next). See `src/scene/README.md`
+  for the render recipes.
 - [ ] **3.1 Integration points**: `src/scene/` folder ready to receive the Blender glTF meadow + machine (r3f `<Canvas>` shell, glTF loader, named animation/interaction hooks). *No placeholder 3D before the handoff.*
 - [ ] **3.2 Analog dial** mood selector + small digital screen readout.
 - [ ] **3.3 Procedural sky/lighting** per mood (sky gradient, sun/moon position, stars at midnight) — independent of the meadow model.
@@ -39,7 +44,7 @@ Moods: `sunrise · high-noon · golden-hour · dusk · midnight`
 
 ## Phase 4 — Ship
 
-- [ ] Final content pass (all five pools filled), cross-device QA, custom domain if desired.
+- [ ] Final content pass (all four pools filled), cross-device QA, custom domain if desired.
 
 ---
 

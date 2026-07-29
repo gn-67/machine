@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Blender render masters (PNG) — the site uses the WebP copies in public/renders
+/renders/
+
 # Environment / secrets — never commit
 .env
 .env.*

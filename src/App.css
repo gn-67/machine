@@ -1,157 +1,185 @@
-/* Phase 2 prototype styles — deliberately simple; the real visual layer
-   (dial, meadow, tumbling cards) arrives in Phase 3. The per-mood background
-   tint is a small preview of the time-of-day theming to come. */
+/* Initial visual prototype — the four Blender renders are the scene,
+   crossfaded on mood change. UI floats over them as a light HUD.
+   Card faces are intentionally blank for now. */
 
-.app {
+.scene {
+  position: relative;
   min-height: 100svh;
-  padding: 3rem 1.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* --- backdrop: all four moods stay mounted, only opacity moves --- */
+
+.backdrop,
+.bg {
+  position: absolute;
+  inset: 0;
+}
+
+.bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 63% center; /* keeps the machine in view when cropping to portrait */
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  user-select: none;
+}
+
+.bg.visible {
+  opacity: 1;
+}
+
+/* --- HUD --- */
+
+.hud {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: background 0.6s ease;
+  gap: 0.75rem;
+  padding: 1.25rem 1rem;
 }
 
-/* time-of-day tints */
-.mood-sunrise    { background: linear-gradient(180deg, #ffe9d6, #fdf6ee); color: #4a3728; }
-.mood-high-noon  { background: linear-gradient(180deg, #dff0ff, #f7fbff); color: #23445c; }
-.mood-golden-hour{ background: linear-gradient(180deg, #ffe3b3, #fff3dd); color: #5c4318; }
-.mood-dusk       { background: linear-gradient(180deg, #d9d4ee, #f0edf8); color: #3a3355; }
-.mood-midnight   { background: linear-gradient(180deg, #141829, #232946); color: #e4e6f5; }
+.hud-bottom {
+  padding-bottom: 2.25rem;
+}
 
 h1 {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  letter-spacing: -0.03em;
-  text-align: center;
-}
-
-.tagline {
-  margin: 0.25rem 0 2rem;
-  opacity: 0.7;
-  text-align: center;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
 }
 
 .mood-picker {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.4rem;
   justify-content: center;
+  padding: 0.35rem;
+  border-radius: 999px;
+  background: rgba(15, 15, 25, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .mood-btn {
   font: inherit;
-  padding: 0.5rem 1rem;
+  font-size: 0.88rem;
+  padding: 0.4rem 0.9rem;
   border-radius: 999px;
-  border: 1px solid currentColor;
+  border: none;
   background: transparent;
   color: inherit;
   cursor: pointer;
-  opacity: 0.55;
-  transition: opacity 0.2s ease;
+  opacity: 0.65;
+  transition: opacity 0.2s ease, background 0.3s ease;
 }
 
-.mood-btn:hover { opacity: 0.85; }
-.mood-btn.active { opacity: 1; background: rgba(127, 127, 127, 0.12); }
-
-.mood-note {
-  margin: 0.75rem 0 1.5rem;
-  font-size: 0.9rem;
-  opacity: 0.7;
+.mood-btn:hover {
+  opacity: 0.9;
 }
 
-.pull-btn {
+.mood-btn.active {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.roll-btn {
   font: inherit;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  padding: 0.8rem 2.6rem;
+  letter-spacing: 0.04em;
+  padding: 0.85rem 3rem;
   border-radius: 999px;
   border: none;
-  background: rgba(127, 127, 127, 0.18);
-  color: inherit;
+  background: rgba(15, 15, 25, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #fff;
   cursor: pointer;
-  transition: transform 0.12s ease;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  transition: transform 0.12s ease, background 0.2s ease;
 }
 
-.pull-btn:hover { transform: scale(1.04); }
-.pull-btn:active { transform: scale(0.97); }
+.roll-btn:hover {
+  transform: scale(1.04);
+  background: rgba(15, 15, 25, 0.6);
+}
+
+.roll-btn:active {
+  transform: scale(0.97);
+}
 
 .error {
-  margin-top: 1.5rem;
-  color: #c0392b;
+  margin: 0;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  background: rgba(120, 20, 20, 0.75);
   max-width: 34rem;
   text-align: center;
   white-space: pre-wrap;
+  font-size: 0.9rem;
 }
+
+/* --- blank cards tumbling out of the machine --- */
 
 .cards {
-  margin-top: 2.5rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.25rem;
-  width: min(64rem, 100%);
-}
-
-.card {
-  background: rgba(255, 255, 255, 0.82);
-  color: #2a2530;
-  border-radius: 16px;
-  padding: 1.1rem;
   display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  box-shadow: 0 8px 24px rgba(20, 16, 40, 0.1);
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.mood-midnight .card {
-  background: rgba(30, 34, 58, 0.85);
-  color: #e9eaf6;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+.card.blank {
+  width: min(200px, 27vw);
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 12px 32px rgba(10, 8, 24, 0.35);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0.7rem;
+  animation: card-in 0.55s cubic-bezier(0.22, 1.2, 0.36, 1) both;
 }
 
 .card-kind {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  opacity: 0.6;
+  letter-spacing: 0.16em;
+  color: rgba(40, 36, 54, 0.55);
 }
 
-.card-img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: 10px;
-  background: rgba(127, 127, 127, 0.15);
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(46px) rotate(-1.5deg) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0) scale(1);
+  }
 }
 
-.card-img.placeholder {
-  background: linear-gradient(135deg, rgba(127, 127, 127, 0.22), rgba(127, 127, 127, 0.08));
-}
+@media (prefers-reduced-motion: reduce) {
+  .bg {
+    transition: none;
+  }
 
-.card h2 {
-  margin: 0.35rem 0 0;
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 1.3;
-}
+  .card.blank {
+    animation: none;
+  }
 
-.card-sub {
-  margin: 0;
-  font-size: 0.92rem;
-  opacity: 0.75;
-}
-
-.card a {
-  color: inherit;
-  font-size: 0.9rem;
-  width: fit-content;
-}
-
-.attribution {
-  margin: 0.6rem 0 0;
-  padding-top: 0.6rem;
-  border-top: 1px solid rgba(127, 127, 127, 0.25);
-  font-size: 0.85rem;
-  font-style: italic;
-  opacity: 0.8;
+  .roll-btn,
+  .roll-btn:hover,
+  .roll-btn:active {
+    transform: none;
+  }
 }

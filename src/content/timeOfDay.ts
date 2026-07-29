@@ -6,8 +6,7 @@ import type { Mood } from "./types";
  *
  *   05:00–08:59  sunrise
  *   09:00–15:59  high noon
- *   16:00–18:59  golden hour
- *   19:00–21:59  dusk
+ *   16:00–21:59  golden hour (covers dusk)
  *   22:00–04:59  midnight
  */
 export function moodForHour(hour: number): Mood {
@@ -16,8 +15,7 @@ export function moodForHour(hour: number): Mood {
   }
   if (hour >= 5 && hour < 9) return "sunrise";
   if (hour >= 9 && hour < 16) return "high-noon";
-  if (hour >= 16 && hour < 19) return "golden-hour";
-  if (hour >= 19 && hour < 22) return "dusk";
+  if (hour >= 16 && hour < 22) return "golden-hour";
   return "midnight";
 }
 

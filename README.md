@@ -1,7 +1,7 @@
 # machine
 
 An inspiration vending machine — a birthday gift. Dial in a time-of-day mood
-(sunrise · high noon · golden hour · dusk · midnight), press the button, and
+(sunrise · high noon · golden hour · midnight), press the button, and
 receive one song, one artwork, and one texture close-up — each with a note
 about why it was picked.
 
@@ -22,7 +22,8 @@ as-is.
 ## Adding content (CMS-lite)
 
 All content lives in `src/content/data/*.json`. Every entry needs a `mood`
-(one of `sunrise`, `high-noon`, `golden-hour`, `dusk`, `midnight`) and an
+(one of `sunrise`, `high-noon`, `golden-hour`, `midnight` — golden hour
+covers dusk) and an
 `attribution` — the "why this was picked" line shown on the card. Entries are
 validated at load; a typo fails the tests rather than silently emptying a pool.
 
