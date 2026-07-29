@@ -106,7 +106,7 @@ describe("songPlayUrl", () => {
     expect(songPlayUrl(base)).toBe("https://open.spotify.com/track/track123");
   });
 
-  it("adds the playlist context for synced tracks", () => {
+  it("opens synced tracks inside their playlist, highlighted", () => {
     const synced: Song = {
       ...base,
       source: "spotify-sync",
@@ -114,7 +114,7 @@ describe("songPlayUrl", () => {
       playlistName: "late night drive",
     };
     expect(songPlayUrl(synced)).toBe(
-      "https://open.spotify.com/track/track123?context=spotify%3Aplaylist%3Apl456",
+      "https://open.spotify.com/playlist/pl456?highlight=spotify%3Atrack%3Atrack123",
     );
   });
 
