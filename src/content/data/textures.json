@@ -1,52 +1,172 @@
 [
   {
     "kind": "texture",
-    "id": "placeholder-sunrise-mist",
+    "id": "sunrise-condensation",
     "mood": "sunrise",
     "title": "Condensation on glass",
     "description": "Backlit droplets on a cold window, first light coming through.",
     "image": null,
     "url": null,
-    "attribution": "placeholder — texture close-ups get hand-picked and swapped in"
+    "attribution": "the day still undecided, seen through a fogged window"
   },
   {
     "kind": "texture",
-    "id": "placeholder-high-noon-concrete",
+    "id": "sunrise-dew-on-grass",
+    "mood": "sunrise",
+    "title": "Dew on grass",
+    "description": "Every blade beaded overnight, each drop holding a tiny inverted sky.",
+    "image": null,
+    "url": null,
+    "attribution": "gone by nine — you have to be up for it"
+  },
+  {
+    "kind": "texture",
+    "id": "sunrise-croissant",
+    "mood": "sunrise",
+    "title": "Torn croissant",
+    "description": "Shattered lamination, butter in a hundred glass-thin layers.",
+    "image": null,
+    "url": null,
+    "attribution": "the texture of a morning with nowhere to be"
+  },
+  {
+    "kind": "texture",
+    "id": "sunrise-linen",
+    "mood": "sunrise",
+    "title": "Rumpled linen",
+    "description": "Sheets holding the shape of sleep in early side-light.",
+    "image": null,
+    "url": null,
+    "attribution": "soft topography — the first thing the sun touches"
+  },
+  {
+    "kind": "texture",
+    "id": "high-noon-concrete",
     "mood": "high-noon",
     "title": "Sun-bleached concrete",
     "description": "Hard shadows, zero gradient — the flattest light of the day.",
     "image": null,
     "url": null,
-    "attribution": "placeholder — texture close-ups get hand-picked and swapped in"
+    "attribution": "midday honesty: nothing hidden, nothing softened"
   },
   {
     "kind": "texture",
-    "id": "placeholder-golden-hour-brass",
+    "id": "high-noon-watermelon",
+    "mood": "high-noon",
+    "title": "Watermelon flesh",
+    "description": "Cold pink grid with black seeds, cut side up on a hot day.",
+    "image": null,
+    "url": null,
+    "attribution": "July at its most literal"
+  },
+  {
+    "kind": "texture",
+    "id": "high-noon-pool-caustics",
+    "mood": "high-noon",
+    "title": "Pool water caustics",
+    "description": "White light nets flexing over turquoise.",
+    "image": null,
+    "url": null,
+    "attribution": "the pattern that only exists when the sun is straight overhead"
+  },
+  {
+    "kind": "texture",
+    "id": "high-noon-lemon",
+    "mood": "high-noon",
+    "title": "Backlit lemon slice",
+    "description": "Pith and pulp lit from behind like stained glass.",
+    "image": null,
+    "url": null,
+    "attribution": "full brightness, full sour"
+  },
+  {
+    "kind": "texture",
+    "id": "golden-hour-brass",
     "mood": "golden-hour",
     "title": "Brushed brass",
     "description": "Warm metal catching low-angle light along its grain.",
     "image": null,
     "url": null,
-    "attribution": "placeholder — texture close-ups get hand-picked and swapped in"
+    "attribution": "a metal that only comes alive in low light"
   },
   {
     "kind": "texture",
-    "id": "placeholder-dusk-velvet",
+    "id": "golden-hour-wheat",
+    "mood": "golden-hour",
+    "title": "Backlit wheat",
+    "description": "A field of awns catching the last low sun, every stalk haloed.",
+    "image": null,
+    "url": null,
+    "attribution": "Monet built whole paintings out of this exact glow"
+  },
+  {
+    "kind": "texture",
+    "id": "golden-hour-terracotta",
+    "mood": "golden-hour",
+    "title": "Terracotta in raking light",
+    "description": "Fired clay, every ridge and thumbprint thrown into relief.",
+    "image": null,
+    "url": null,
+    "attribution": "holds the day's heat long after the sun drops"
+  },
+  {
+    "kind": "texture",
+    "id": "golden-hour-honey",
+    "mood": "golden-hour",
+    "title": "Honey in glass",
+    "description": "Slow amber pour, light trapped mid-fall.",
+    "image": null,
+    "url": null,
+    "attribution": "the exact color of the hour, pourable"
+  },
+  {
+    "kind": "texture",
+    "id": "golden-hour-velvet",
     "mood": "golden-hour",
     "title": "Crushed velvet",
     "description": "Deep blue pile shifting between light and shadow as it folds.",
     "image": null,
     "url": null,
-    "attribution": "placeholder — texture close-ups get hand-picked and swapped in"
+    "attribution": "dusk in fabric form — the blue hour you can touch"
   },
   {
     "kind": "texture",
-    "id": "placeholder-midnight-vinyl",
+    "id": "midnight-vinyl",
     "mood": "midnight",
     "title": "Vinyl grooves",
     "description": "Macro shot of record grooves under a single lamp.",
     "image": null,
     "url": null,
-    "attribution": "placeholder — texture close-ups get hand-picked and swapped in"
+    "attribution": "music you can see — the physical middle of the night"
+  },
+  {
+    "kind": "texture",
+    "id": "midnight-wet-asphalt",
+    "mood": "midnight",
+    "title": "Streetlight on wet asphalt",
+    "description": "Sodium-orange glow doubled in the road after rain.",
+    "image": null,
+    "url": null,
+    "attribution": "the whole city repainted for whoever is still out"
+  },
+  {
+    "kind": "texture",
+    "id": "midnight-moon-water",
+    "mood": "midnight",
+    "title": "Moonlight on black water",
+    "description": "A path of broken silver across still water.",
+    "image": null,
+    "url": null,
+    "attribution": "a road you can't take, pointed straight at you"
+  },
+  {
+    "kind": "texture",
+    "id": "midnight-dark-chocolate",
+    "mood": "midnight",
+    "title": "Dark chocolate snap",
+    "description": "Matte surface, clean break, faint gloss on the fracture line.",
+    "image": null,
+    "url": null,
+    "attribution": "bitter, precise, best after everyone else is asleep"
   }
 ]
