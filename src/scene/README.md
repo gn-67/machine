@@ -11,24 +11,42 @@ headless so the visual layer is swappable.
 
 ## Mood renders (already delivered)
 
-`public/renders/{sunrise,high-noon,golden-hour,midnight}.webp` — four
-1920×1080 Cycles renders of the meadow scene from the *same locked camera*,
-differing only in sky/lighting. One per mood, so the site can show the frame
-for the active mood and crossfade between them on dial change (only light
-changes, nothing jumps). Load all four up front (or lazy-load neighbors) and
-animate `opacity` between two stacked planes/`<img>`s — no WebGL required,
-though a three.js textured quad works the same way.
+`public/renders/{sunrise,high-noon,golden-hour,midnight}.mp4` — four 6-second
+1920×1080/24fps looping videos of the meadow scene from the *same locked
+camera*, differing only in sky/lighting. The grass sways (hair dynamics +
+gusting wind); the wind sim was baked **once** and all four moods rendered
+over the same frames, so grass motion is pixel-identical across moods at any
+timestamp. Loops are made seamless by cross-blending the final second into
+the first. `public/renders/{mood}.webp` is each video's first frame, used as
+the `poster` for instant paint.
 
-They were produced from `emilybday.blend` with the World's Nishita Sky
-Texture; recipe per mood (everything else left at the file's values —
-sun size ≈ 14°, sun intensity 12.8, background strength 1.0):
+Playback pattern (implemented in `src/App.tsx`): all four `<video>`s stay
+mounted; only the active one plays; on mood change the incoming video is
+seeked to the outgoing one's `currentTime`, faded in over ~0.9s, then the old
+one is paused. Because the loops share a timeline, the field never jumps.
 
-| mood        | sun disc | elevation | rotation      | other                                  |
-| ----------- | -------- | --------- | ------------- | -------------------------------------- |
-| sunrise     | on       | 0.8°      | 0.192 rad     | (file's own draft, untouched)          |
-| high-noon   | on       | 60°       | 0.192 rad     | sun intensity 0.05, bg strength 0.3    |
-| golden-hour | on       | 2°        | 0.492 rad     | dust density 3.0 (sun sits behind machine) |
-| midnight    | off      | −9°       | 0.192 rad     | machine's interior lights carry the frame |
+Produced from `emilybday.blend` with the World's Nishita Sky Texture; recipe
+per mood (unlisted values stay at the file's own: sun size ≈ 14°, sun
+intensity 12.8, background strength 1.0):
+
+| mood        | sun disc | elevation | rotation  | other                                        |
+| ----------- | -------- | --------- | --------- | -------------------------------------------- |
+| sunrise     | on       | 0.8°      | 0.192 rad | (file's own draft, untouched)                |
+| high-noon   | on       | 60°       | 0.192 rad | sun intensity 0.05, bg strength 0.3          |
+| golden-hour | on, 3°   | 2°        | 0.78 rad  | sun intensity 6, dust 5, bg 0.7 — small disc because the 14° disc averages too white for golden light |
+| midnight    | off      | −4°       | 3.63 rad  | bg 1.4; glow rotated behind camera so the sky is blue ambient, machine lights carry the frame |
+
+Pipeline scripts (run against the .blend, never modify it):
+`scripts/render-moods.py` (stills), `scripts/render-sway-frames.py`
+(sim + per-frame mood renders), `scripts/make-loops.py` (seamless loop
+blend + H.264 encode + posters).
+
+A snapshot of the scene file is committed at `blender/emilybday.blend`
+(saved 2026-07-29 00:06) so renders are reproducible from any machine —
+e.g. `blender --background blender/emilybday.blend --python
+scripts/render-moods.py -- final out/`. Note: the "Edensor-FREE" font the
+Text objects reference is not in the repo; without it installed, text falls
+back to Blender's default font (which is what all current renders show).
 
 ## Planned structure
 

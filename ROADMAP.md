@@ -35,6 +35,9 @@ dusk — four moods, matching the four Blender sky renders in `public/renders/`)
   (`public/renders/`) are the full-screen scene; moods crossfade seamlessly;
   roll produces three blank cards (faces come next). See `src/scene/README.md`
   for the render recipes.
+- [x] **3.0.1 Living meadow**: per-mood 6s looping videos with swaying grass
+  (baked wind sim shared across moods, frame-synced, seamless loops);
+  crossfade + timeline handoff on mood change; webp posters for instant paint.
 - [ ] **3.1 Integration points**: `src/scene/` folder ready to receive the Blender glTF meadow + machine (r3f `<Canvas>` shell, glTF loader, named animation/interaction hooks). *No placeholder 3D before the handoff.*
 - [ ] **3.2 Analog dial** mood selector + small digital screen readout.
 - [ ] **3.3 Procedural sky/lighting** per mood (sky gradient, sun/moon position, stars at midnight) — independent of the meadow model.

@@ -15,6 +15,9 @@ dist-ssr
 # Blender render masters (PNG) — the site uses the WebP copies in public/renders
 /renders/
 
+# Claude Code session workspace (worktrees, local settings)
+.claude/
+
 # Environment / secrets — never commit
 .env
 .env.*

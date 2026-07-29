@@ -12,6 +12,12 @@
   color: #fff;
 }
 
+/* fallback tint while the poster/video loads */
+.mood-sunrise    { background: #e8cdb5; }
+.mood-high-noon  { background: #c8d4dc; }
+.mood-golden-hour{ background: #d9a86a; }
+.mood-midnight   { background: #06070a; }
+
 /* --- backdrop: all four moods stay mounted, only opacity moves --- */
 
 .backdrop,

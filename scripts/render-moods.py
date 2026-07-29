@@ -57,12 +57,15 @@ MOODS = {
     "sunrise": {"sun_disc": True, "sun_elevation": 0.013963, "sun_rotation": 0.191986},
     "high-noon": {"sun_disc": True, "sun_elevation": math.radians(60), "sun_rotation": 0.191986,
                   "sun_intensity": 0.05, "bg_strength": 0.3},
-    "golden-hour": {"sun_disc": True, "sun_elevation": math.radians(2), "sun_rotation": 0.191986 + 0.30,
-                    "dust_density": 3.0},
-    "midnight": {"sun_disc": False, "sun_elevation": math.radians(-9), "sun_rotation": 0.191986},
+    # small sun disc: the stylized ~14deg disc averages too white for golden light
+    "golden-hour": {"sun_disc": True, "sun_size": math.radians(3.0), "sun_elevation": math.radians(2.0),
+                    "sun_rotation": 0.78, "sun_intensity": 6.0, "dust_density": 5.0, "bg_strength": 0.7},
+    # glow rotated behind camera: dark blue ambient without a sunset band
+    "midnight": {"sun_disc": False, "sun_elevation": math.radians(-4.0), "sun_rotation": 3.63,
+                 "bg_strength": 1.4},
 }
 
-TUNABLE = ["sun_disc", "sun_elevation", "sun_rotation", "sun_intensity", "dust_density"]
+TUNABLE = ["sun_disc", "sun_elevation", "sun_rotation", "sun_intensity", "dust_density", "sun_size"]
 BASELINE = {k: getattr(sky, k) for k in TUNABLE}
 BASELINE_BG = bg.inputs["Strength"].default_value
 
