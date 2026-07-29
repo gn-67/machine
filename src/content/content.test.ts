@@ -3,7 +3,7 @@ import playlistsConfig from "../../scripts/spotify.playlists.json";
 import { moodForHour, moodForMinutes, DAY_MINUTES } from "./timeOfDay";
 import { pull } from "./pull";
 import type { SeenStore } from "./pull";
-import { songPlayUrl } from "./spotify";
+import { songPlayUrl, songSpotifyUri } from "./spotify";
 import { poolFor, songs, artwork, textures } from "./store";
 import { MOODS, type Mood, type Song } from "./types";
 
@@ -129,6 +129,35 @@ describe("songPlayUrl", () => {
 
   it("returns null when the song has no url", () => {
     expect(songPlayUrl({ ...base, url: null })).toBeNull();
+  });
+});
+
+describe("songSpotifyUri", () => {
+  const base: Song = {
+    kind: "song",
+    id: "track123",
+    mood: "midnight",
+    title: "t",
+    artist: "a",
+    albumArt: null,
+    url: "https://open.spotify.com/track/track123",
+    source: "manual",
+    attribution: "why",
+  };
+
+  it("is a bare track URI with no playlist context", () => {
+    expect(songSpotifyUri(base)).toBe("spotify:track:track123");
+  });
+
+  it("carries playlist context for synced tracks, so the app autoplays in-context", () => {
+    const synced: Song = { ...base, source: "spotify-sync", playlistId: "pl456" };
+    expect(songSpotifyUri(synced)).toBe(
+      "spotify:track:track123?context=spotify%3Aplaylist%3Apl456",
+    );
+  });
+
+  it("returns null when the song has no url", () => {
+    expect(songSpotifyUri({ ...base, url: null })).toBeNull();
   });
 });
 

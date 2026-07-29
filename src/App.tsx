@@ -74,6 +74,7 @@ export default function App() {
   const [rollId, setRollId] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const videoRefs = useRef<Partial<Record<Mood, HTMLVideoElement | null>>>({});
+  const cardColumnRef = useRef<HTMLElement>(null);
 
   const mood = moodForMinutes(minutes);
   const prevMoodRef = useRef<Mood>(mood);
@@ -132,8 +133,15 @@ export default function App() {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setSelectedKind(null);
     };
+    const onPointerDown = (e: PointerEvent) => {
+      if (!cardColumnRef.current?.contains(e.target as Node)) setSelectedKind(null);
+    };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointerDown);
+    };
   }, [selectedKind]);
 
   function handleRoll() {
@@ -176,7 +184,7 @@ export default function App() {
 
       <Note />
 
-      <aside className="hud-left">
+      <aside className="hud-left" ref={cardColumnRef}>
         <div className="card-stack" aria-label="Your pull">
           {CARD_KINDS.map((kind, i) => {
             const preview = result
@@ -205,11 +213,7 @@ export default function App() {
           })}
         </div>
         {result && selectedKind && (
-          <CardDetail
-            key={`${rollId}-${selectedKind}`}
-            item={result[selectedKind]}
-            onClose={() => setSelectedKind(null)}
-          />
+          <CardDetail key={`${rollId}-${selectedKind}`} item={result[selectedKind]} />
         )}
       </aside>
 

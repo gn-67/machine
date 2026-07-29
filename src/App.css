@@ -233,27 +233,6 @@ h1 {
   }
 }
 
-.detail-close {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.6rem;
-  font: inherit;
-  font-size: 1.15rem;
-  line-height: 1;
-  width: 1.8rem;
-  height: 1.8rem;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.detail-close:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
 .detail-kind {
   font-size: 0.68rem;
   text-transform: uppercase;
@@ -294,6 +273,8 @@ h1 {
 }
 
 .detail-link {
+  font: inherit;
+  border: none;
   align-self: flex-start;
   font-size: 0.82rem;
   letter-spacing: 0.04em;
@@ -302,6 +283,7 @@ h1 {
   padding: 0.35rem 0.85rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.16);
+  cursor: pointer;
   transition: background 0.2s ease;
 }
 

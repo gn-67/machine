@@ -1,14 +1,15 @@
 import type { ContentItem } from "../content/types";
-import { songPlayUrl } from "../content/spotify";
+import { openSong } from "../content/spotify";
 
 /**
  * Expanded view for one pulled card, shown in the gap between the card
  * column and the machine. Renders whatever the content model has — image,
- * title, subtitle, the always-present attribution, and a link out.
+ * title, subtitle, the always-present attribution, and a link out. No close
+ * button: App.tsx closes this on an outside click or when another card is
+ * picked.
  */
-export function CardDetail({ item, onClose }: { item: ContentItem; onClose: () => void }) {
+export function CardDetail({ item }: { item: ContentItem }) {
   const image = item.kind === "song" ? item.albumArt : item.image;
-  const link = item.kind === "song" ? songPlayUrl(item) : item.url;
   const subtitle =
     item.kind === "song"
       ? item.artist
@@ -20,9 +21,6 @@ export function CardDetail({ item, onClose }: { item: ContentItem; onClose: () =
 
   return (
     <section className="card-detail" aria-label={`${item.kind} details`}>
-      <button className="detail-close" onClick={onClose} aria-label="Close details">
-        ×
-      </button>
       <span className="detail-kind">{item.kind}</span>
       {image ? (
         <img className="detail-image" src={image} alt="" />
@@ -32,8 +30,13 @@ export function CardDetail({ item, onClose }: { item: ContentItem; onClose: () =
       <h2 className="detail-title">{item.title}</h2>
       {subtitle && <p className="detail-subtitle">{subtitle}</p>}
       <p className="detail-attribution">{item.attribution}</p>
-      {link && (
-        <a className="detail-link" href={link} target="_blank" rel="noreferrer">
+      {item.kind === "song" && item.url && (
+        <button className="detail-link" onClick={() => openSong(item)}>
+          play in playlist ↗
+        </button>
+      )}
+      {item.kind !== "song" && item.url && (
+        <a className="detail-link" href={item.url} target="_blank" rel="noreferrer">
           open ↗
         </a>
       )}
