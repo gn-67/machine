@@ -36,14 +36,18 @@ validated at load; a typo fails the tests rather than silently emptying a pool.
 
 ## Syncing songs from Spotify
 
-1. Create an app at <https://developer.spotify.com/dashboard>, copy
-   `.env.example` to `.env`, fill in the client ID/secret. `.env` is
-   gitignored — credentials never ship to the browser or the repo; the sync
-   runs locally via the Client Credentials flow (public playlist data only).
-2. Map public playlist URLs to moods (with an attribution line per playlist)
-   in `scripts/spotify.playlists.json`.
-3. `npm run sync-spotify` — snapshots track name, artists, album art, and link
-   into `songs.json`. Re-runnable; never touches manual entries.
+No credentials needed: the sync reads Spotify's public embed/oEmbed endpoints.
+(The official Web API returns 403 on all track data for apps created under the
+2025 dev-mode restrictions, even with valid Client Credentials — see the note
+in `scripts/sync-spotify.mjs`.)
+
+1. Map public playlist URLs to moods in `scripts/spotify.playlists.json`.
+   Attribution is generated from the playlist's real name (`from your "Name"
+   playlist`); add an `attribution` field to a playlist entry to override it.
+2. `npm run sync-spotify` — snapshots track name, artists, album art, link,
+   and source playlist into `songs.json`. Re-runnable; never touches manual
+   entries. Song cards should link via `songPlayUrl()` (`src/content/spotify.ts`),
+   which opens the track inside its playlist so playback continues through it.
 
 ## Architecture notes
 

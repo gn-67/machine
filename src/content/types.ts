@@ -40,6 +40,13 @@ export interface Song extends ContentBase {
   url: string | null;
   /** Where this entry came from: the sync script or a hand-picked addition. */
   source: "spotify-sync" | "manual";
+  /**
+   * Source playlist, set by the sync script. Powers the "open this song inside
+   * its playlist" link (see spotify.ts) and lets cards name the playlist.
+   * Absent on manual entries.
+   */
+  playlistId?: string;
+  playlistName?: string;
 }
 
 export interface Artwork extends ContentBase {

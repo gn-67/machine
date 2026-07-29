@@ -37,6 +37,10 @@ function loadSongs(raw: unknown[]): Song[] {
     requireString("songs.json", item, "artist");
     if (item.source !== "spotify-sync" && item.source !== "manual")
       fail("songs.json", item, 'source must be "spotify-sync" or "manual"');
+    if (item.source === "spotify-sync") {
+      requireString("songs.json", item, "playlistId");
+      requireString("songs.json", item, "playlistName");
+    }
     if (seen.has(item.id as string)) fail("songs.json", item, `duplicate id "${item.id}"`);
     seen.add(item.id as string);
     return item as unknown as Song;

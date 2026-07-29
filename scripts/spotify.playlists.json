@@ -1,10 +1,33 @@
 {
-  "_comment": "Map each mood to public Spotify playlists. `attribution` is the line shown on every card synced from that playlist. Playlist value can be a full open.spotify.com URL, spotify:playlist: URI, or bare playlist id.",
+  "_comment": "Map each mood to public Spotify playlists. Playlist value can be a full open.spotify.com URL, spotify:playlist: URI, or bare playlist id. `attribution` is optional — when omitted, the sync generates one from the playlist's real name (from your \"Name\" playlist).",
   "playlists": [
     {
+      "mood": "sunrise",
+      "playlist": "https://open.spotify.com/playlist/0yavIlRIfjyMSaGwX41XyN"
+    },
+    {
+      "mood": "high-noon",
+      "playlist": "https://open.spotify.com/playlist/3c2FmOSMAmCRsRCEjpyPL8"
+    },
+    {
+      "mood": "high-noon",
+      "playlist": "https://open.spotify.com/playlist/7uK8q2MO4utAkKFmbWwv2z"
+    },
+    {
+      "mood": "golden-hour",
+      "playlist": "https://open.spotify.com/playlist/1I6quQW0tpxk1crCdilcAv"
+    },
+    {
+      "mood": "golden-hour",
+      "playlist": "https://open.spotify.com/playlist/79PdNeRKQVcA6Ru01yetbx"
+    },
+    {
       "mood": "midnight",
-      "playlist": "PASTE_PUBLIC_PLAYLIST_URL_HERE",
-      "attribution": "from your late night drive playlist"
+      "playlist": "https://open.spotify.com/playlist/2GauG1QbpT6h8VdeSCyTpF"
+    },
+    {
+      "mood": "midnight",
+      "playlist": "https://open.spotify.com/playlist/3cGgEF4r36GiueSj9AJEHo"
     }
   ]
 }
