@@ -127,18 +127,31 @@ export default function App() {
 
       <aside className="hud-left">
         <div className="card-stack" aria-label="Your pull">
-          {CARD_KINDS.map((kind, i) => (
-            <button
-              key={result ? `${rollId}-${kind}` : kind}
-              className={`card ${result ? "popped" : "slot"}${selectedKind === kind ? " selected" : ""}`}
-              style={result ? { animationDelay: `${i * 0.12}s` } : undefined}
-              disabled={!result}
-              aria-pressed={selectedKind === kind}
-              onClick={() => setSelectedKind((k) => (k === kind ? null : kind))}
-            >
-              <span className="card-kind">{kind}</span>
-            </button>
-          ))}
+          {CARD_KINDS.map((kind, i) => {
+            const preview = result
+              ? kind === "song"
+                ? result.song.albumArt
+                : result[kind].image
+              : null;
+            return (
+              <button
+                key={result ? `${rollId}-${kind}` : kind}
+                className={`card ${result ? "popped" : "slot"}${selectedKind === kind ? " selected" : ""}`}
+                style={result ? { animationDelay: `${i * 0.12}s` } : undefined}
+                disabled={!result}
+                aria-pressed={selectedKind === kind}
+                onClick={() => setSelectedKind((k) => (k === kind ? null : kind))}
+              >
+                {result &&
+                  (preview ? (
+                    <img className="card-preview" src={preview} alt="" />
+                  ) : (
+                    <div className="card-preview placeholder" aria-hidden="true" />
+                  ))}
+                <span className="card-kind">{kind}</span>
+              </button>
+            );
+          })}
         </div>
         {result && selectedKind && (
           <CardDetail

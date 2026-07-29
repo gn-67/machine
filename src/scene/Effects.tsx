@@ -18,8 +18,9 @@ import type { Mood } from "../content/types";
  * moods, and a twinkling star field for midnight. Everything is positioned
  * in the *video's* UV space — the crop uniform replicates the backdrop's
  * `object-fit: cover; object-position: 63%` so effects stay pinned to the
- * rendered sun/sky as the viewport resizes. Mood changes ease all parameters
- * over ~0.9s, matching the video crossfade.
+ * rendered sun/sky as the viewport resizes. On mood change the effects fade
+ * out in place, snap to the new mood's position while invisible, then fade
+ * back in after a beat — the sun never visibly slides across the sky.
  *
  * Sun positions / star masks were measured off the poster frames:
  * sunrise sun at uv(0.04, 0.27) (big disc), golden hour at uv(0.935, 0.36)
@@ -190,6 +191,7 @@ export function EffectsOverlay({ mood }: { mood: Mood }) {
     const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
+    // Start invisible: intensities at 0, faded in once the page has settled.
     const start = FX_BY_MOOD[moodRef.current];
     const uniforms = {
       uTime: { value: 0 },
@@ -197,11 +199,11 @@ export function EffectsOverlay({ mood }: { mood: Mood }) {
       uSun: { value: new Vector2(...start.sun) },
       uSunRadius: { value: start.sunRadius },
       uGlowColor: { value: new Vector3(...start.glowColor) },
-      uGlow: { value: start.glow },
-      uRays: { value: start.rays },
+      uGlow: { value: 0 },
+      uRays: { value: 0 },
       uRayColor: { value: new Vector3(...start.rayColor) },
-      uStars: { value: start.stars },
-      uFlicker: { value: start.flicker },
+      uStars: { value: 0 },
+      uFlicker: { value: 0 },
     };
 
     const scene = new Scene();
@@ -218,20 +220,39 @@ export function EffectsOverlay({ mood }: { mood: Mood }) {
     window.addEventListener("resize", resize);
 
     let last = performance.now();
+    let shownMood = moodRef.current;
+    let fadeInAt = last + 1600; // initial page settle before first fade-in
     renderer.setAnimationLoop((now) => {
       const dt = Math.min((now - last) / 1000, 0.1);
       last = now;
-      // ease all params toward the active mood, matching the video crossfade
-      const k = 1 - Math.exp(-dt / 0.35);
-      const t = FX_BY_MOOD[moodRef.current];
-      uniforms.uSun.value.lerp(new Vector2(...t.sun), k);
-      uniforms.uGlowColor.value.lerp(new Vector3(...t.glowColor), k);
-      uniforms.uRayColor.value.lerp(new Vector3(...t.rayColor), k);
-      uniforms.uSunRadius.value += (t.sunRadius - uniforms.uSunRadius.value) * k;
-      uniforms.uGlow.value += (t.glow - uniforms.uGlow.value) * k;
-      uniforms.uRays.value += (t.rays - uniforms.uRays.value) * k;
-      uniforms.uStars.value += (t.stars - uniforms.uStars.value) * k;
-      uniforms.uFlicker.value += (t.flicker - uniforms.uFlicker.value) * k;
+
+      let fadingOut = false;
+      if (moodRef.current !== shownMood) {
+        const faded =
+          uniforms.uGlow.value < 0.01 &&
+          uniforms.uRays.value < 0.01 &&
+          uniforms.uStars.value < 0.01;
+        if (faded) {
+          // invisible — safe to snap to the new mood's sun and colors
+          shownMood = moodRef.current;
+          const t = FX_BY_MOOD[shownMood];
+          uniforms.uSun.value.set(t.sun[0], t.sun[1]);
+          uniforms.uSunRadius.value = t.sunRadius;
+          uniforms.uGlowColor.value.set(...t.glowColor);
+          uniforms.uRayColor.value.set(...t.rayColor);
+          fadeInAt = now + 1000; // the requested beat before the new zone lights up
+        } else {
+          fadingOut = true;
+        }
+      }
+
+      const hidden = fadingOut || now < fadeInAt;
+      const t = FX_BY_MOOD[shownMood];
+      const k = 1 - Math.exp(-dt / (hidden ? 0.15 : 0.6));
+      uniforms.uGlow.value += ((hidden ? 0 : t.glow) - uniforms.uGlow.value) * k;
+      uniforms.uRays.value += ((hidden ? 0 : t.rays) - uniforms.uRays.value) * k;
+      uniforms.uStars.value += ((hidden ? 0 : t.stars) - uniforms.uStars.value) * k;
+      uniforms.uFlicker.value += ((hidden ? 0 : t.flicker) - uniforms.uFlicker.value) * k;
       uniforms.uTime.value = now / 1000;
       renderer.render(scene, camera);
     });
