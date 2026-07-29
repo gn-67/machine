@@ -160,7 +160,7 @@
     "title": "1° 2° 3° 4°",
     "artist": "Robert Irwin",
     "year": "1997",
-    "image": "public/artwork/00000169-0ceb-dbbe-a16f-4eeb35470000.webp",
+    "image": "/artwork/00000169-0ceb-dbbe-a16f-4eeb35470000.webp",
     "url": "https://en.wikipedia.org/wiki/Robert_Irwin_(artist)",
     "attribution": "three squares cut straight through the museum wall at La Jolla, so the ocean light itself is the piece — you have to be there as the sun drops"
   },
