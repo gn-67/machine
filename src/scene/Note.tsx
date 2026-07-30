@@ -16,7 +16,7 @@ const NOTE = {
   paragraphs: [
     "my thought process behind this website was whenever you are sitting down to design and you need a moment to clear your head from the day that happened or is yet to happen, you could visit this site to help you get started! I often find that a minute of peace helps me focus for so much longer",
     "i hand made the 3d models + animation in the back. i also pulled all the songs from your spotify profile/playlists and had the songs, artworks, and textures curated to match the time of day you visit this site (ik all about those late night portfolio sessions XD)",
-    "i couldn't decide on a name but 'machine' lwk fits IMO even though it feels a bit edgy",
+    "i couldn't decide on a name but 'machine' lwk fits IMO even though it feels a bit edgy. BUT when you are ready click the machine (as many times as you want - the mood changes based on the time of day!)",
   ],
 };
 
