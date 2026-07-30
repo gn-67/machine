@@ -67,6 +67,28 @@
   },
   {
     "kind": "song",
+    "id": "3cKnHNL40tqnmjXiv4FOlk",
+    "mood": "sunrise",
+    "title": "Never Be Yours",
+    "artist": "Kali Uchis",
+    "albumArt": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273b11979739c87f09a74973e91",
+    "url": "https://open.spotify.com/track/3cKnHNL40tqnmjXiv4FOlk",
+    "source": "manual",
+    "attribution": "one of my picks for your morning"
+  },
+  {
+    "kind": "song",
+    "id": "4vjvx7Zxkb4AltGcZ0BBvI",
+    "mood": "sunrise",
+    "title": "Kyoto",
+    "artist": "Phoebe Bridgers",
+    "albumArt": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273a91b75c9ef65ed8d760ff600",
+    "url": "https://open.spotify.com/track/4vjvx7Zxkb4AltGcZ0BBvI",
+    "source": "manual",
+    "attribution": "one of my picks for your morning"
+  },
+  {
+    "kind": "song",
     "id": "1zgHn1EqUyA0HqNYMdJ5ia",
     "mood": "high-noon",
     "title": "Best Time",
@@ -133,6 +155,50 @@
   },
   {
     "kind": "song",
+    "id": "5619Ojc6t9evEEs3B7Drhe",
+    "mood": "high-noon",
+    "title": "Shake It",
+    "artist": "Metro Station",
+    "albumArt": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2734cea2fbb2baf7e378c81f740",
+    "url": "https://open.spotify.com/track/5619Ojc6t9evEEs3B7Drhe",
+    "source": "manual",
+    "attribution": "one of my picks to hype you up"
+  },
+  {
+    "kind": "song",
+    "id": "2YHzuwzIsz8qzpuXh4fFV9",
+    "mood": "high-noon",
+    "title": "Ur All Mine",
+    "artist": "Westwood",
+    "albumArt": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273f8ce34b9a90d923d64fa9a3d",
+    "url": "https://open.spotify.com/track/2YHzuwzIsz8qzpuXh4fFV9",
+    "source": "manual",
+    "attribution": "one of my picks to hype you up"
+  },
+  {
+    "kind": "song",
+    "id": "7wrlUpVhDud4491uA9HIpB",
+    "mood": "high-noon",
+    "title": "YOU SHOULD BE MINE",
+    "artist": "Full Circle Boys",
+    "albumArt": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2732da076a3450987329c880ec9",
+    "url": "https://open.spotify.com/track/7wrlUpVhDud4491uA9HIpB",
+    "source": "manual",
+    "attribution": "one of my picks to hype you up"
+  },
+  {
+    "kind": "song",
+    "id": "4mQVHEjrnuUd7G5IVhSYTk",
+    "mood": "high-noon",
+    "title": "Suit & Tie (feat. JAY-Z)",
+    "artist": "Justin Timberlake, JAŸ-Z",
+    "albumArt": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273c6467bd00844ba3f2084fe3f",
+    "url": "https://open.spotify.com/track/4mQVHEjrnuUd7G5IVhSYTk",
+    "source": "manual",
+    "attribution": "one of my picks to hype you up"
+  },
+  {
+    "kind": "song",
     "id": "5RHf8SmHRWbF3oywpXaQ2i",
     "mood": "golden-hour",
     "title": "Never Can Say Goodbye",
@@ -194,6 +260,28 @@
     "artist": "Sade",
     "albumArt": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2735e25e034e25258b356774c79",
     "url": "https://open.spotify.com/track/0qU806xTLhuZ5kCrex2x4r",
+    "source": "manual",
+    "attribution": "one of my picks for the smooth part of the day"
+  },
+  {
+    "kind": "song",
+    "id": "0Ck2PwCeW99bcyn4ZD3Uvr",
+    "mood": "golden-hour",
+    "title": "Need it Bad (feat. Brent Faiyaz)",
+    "artist": "Ama, Brent Faiyaz",
+    "albumArt": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b27361c9a7cd41413f2a304ab2fd",
+    "url": "https://open.spotify.com/track/0Ck2PwCeW99bcyn4ZD3Uvr",
+    "source": "manual",
+    "attribution": "one of my picks for the smooth part of the day"
+  },
+  {
+    "kind": "song",
+    "id": "5oady7OSE7dH7LHiqmb3Cr",
+    "mood": "golden-hour",
+    "title": "Dreams, Fairytales, Fantasies (feat. Brent Faiyaz & Salaam Remi)",
+    "artist": "A$AP Ferg, Brent Faiyaz, Salaam Remi",
+    "albumArt": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b2731be99f274f2046dcb080a20f",
+    "url": "https://open.spotify.com/track/5oady7OSE7dH7LHiqmb3Cr",
     "source": "manual",
     "attribution": "one of my picks for the smooth part of the day"
   },
@@ -293,6 +381,28 @@
     "artist": "Piero Piccioni",
     "albumArt": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273bcdc5625685ad7a01a744f8b",
     "url": "https://open.spotify.com/track/17wn00VCpnwY2GVIiLyXdD",
+    "source": "manual",
+    "attribution": "one of my picks — soft, piano, for the quiet hours"
+  },
+  {
+    "kind": "song",
+    "id": "6L1xZIyw9U8kICunpmDvq4",
+    "mood": "midnight",
+    "title": "For: You",
+    "artist": "Kali Uchis",
+    "albumArt": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273a7493f1985f820a9add223d2",
+    "url": "https://open.spotify.com/track/6L1xZIyw9U8kICunpmDvq4",
+    "source": "manual",
+    "attribution": "one of my picks — soft, piano, for the quiet hours"
+  },
+  {
+    "kind": "song",
+    "id": "3p4TWyRbo5uVuLVFN8hLQo",
+    "mood": "midnight",
+    "title": "Distant Lover",
+    "artist": "bLAck pARty",
+    "albumArt": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27365e95c3ea30bbd161307b894",
+    "url": "https://open.spotify.com/track/3p4TWyRbo5uVuLVFN8hLQo",
     "source": "manual",
     "attribution": "one of my picks — soft, piano, for the quiet hours"
   }
